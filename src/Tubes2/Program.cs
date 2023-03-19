@@ -14,7 +14,9 @@ namespace Tes
 
             try
             {
-                string[] lines = System.IO.File.ReadAllLines(@"/home/suisei/Documents/GitHub/Tubes2_DuelisSejati/src/Tubes2/tes.txt");
+                // string[] lines = System.IO.File.ReadAllLines(@"/home/suisei/Documents/GitHub/Tubes2_DuelisSejati/src/Tubes2/tes.txt");
+                string[] lines = System.IO.File.ReadAllLines(@"../../../tes.txt");
+                Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
                 string[,] map=new string[lines.GetLength(0),lines.ElementAt(0).Split(" ").Length];
                 for (int i = 0; i < lines.GetLength(0); i++)
                 {
@@ -26,7 +28,8 @@ namespace Tes
                 Map Map=new Map(map);
                 Map.showMap();
                 Bfs bfs = new Bfs(Map);
-                List<string> route=bfs.bfsearch();
+                Tuple<List<string>,List<int[]>> ret=bfs.bfsearch();
+                List<string> route = ret.Item1;
                 for (int i = 0; i < route.Count; i++)
                 {
                     Console.Write(route.ElementAt(i)+" ");

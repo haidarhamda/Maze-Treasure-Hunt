@@ -15,7 +15,7 @@ public class Bfs
     {
         this.map = map;
     }
-    public List<string> bfsearch()
+    public Tuple<List<string>,List<int[]>> bfsearch()
     {
         List<string> route = new List<string>();
         List<int[]> visited = new List<int[]>();
@@ -53,14 +53,14 @@ public class Bfs
                 }
             }
         }
-        return route;
+        return new Tuple<List<string>, List<int[]>>(route,visited);
     }
 
     bool isVisited(List<int[]> visited, int[] node)
     {
-        for (int i = 0; i < visited.Count; i++)
+        foreach (var Node in visited)
         {
-            if (visited.ElementAt(i)[0]==node[0]&&visited.ElementAt(i)[1]==node[1])
+            if (Node[0]==node[0]&&Node[1]==node[1])
             {
                 return true;
             }
@@ -74,16 +74,16 @@ public class Bfs
         int[] nextNode = new int[2];
         switch (i)
         {
-            case 0: nextNode[0] = currentNode[0];
+            case (int) Move.Left: nextNode[0] = currentNode[0];
                 nextNode[1] = currentNode[1] - 1;
                 break;
-            case 1: nextNode[0] = currentNode[0]-1;
+            case (int) Move.Up: nextNode[0] = currentNode[0]-1;
                 nextNode[1] = currentNode[1];
                 break;
-            case 2: nextNode[0] = currentNode[0];
+            case (int) Move.Right: nextNode[0] = currentNode[0];
                 nextNode[1] = currentNode[1] + 1;
                 break;
-            case 3: nextNode[0] = currentNode[0]+1;
+            case (int) Move.Down: nextNode[0] = currentNode[0]+1;
                 nextNode[1] = currentNode[1];
                 break;
         }
