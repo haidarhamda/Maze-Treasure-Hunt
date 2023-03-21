@@ -1,7 +1,9 @@
 using System.IO;
 using System.Linq.Expressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using Tubes_2.algorithms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WinFormsApp1
 {
@@ -33,25 +35,36 @@ namespace WinFormsApp1
 
         private void start_map_visual(object sender, EventArgs e)
         {
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent;
+            //dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Transparent;
             const Int32 BufferSize = 128;
             using (var fileStream = File.OpenRead(settings1.mapfFile))
             {
                 using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
                 {
                     String line;
-                    int col = 0;
                     int row = 0;
+                    int col = 0;
 
                     // COunt rows and columns
                     while ((line = streamReader.ReadLine()) != null)
                     {
-                        col = line.Length;
+                        //MessageBox.Show(line);
+                        col = 0;
+                        for (int i = 0; i < line.Length; i++)
+                        {
+                            if (line[i] != ' ')
+                            {
+                                col++;
+                            }
+                        }
                         row++;
 
                     }
 
                     dataGridView1.ColumnCount = col;
                     dataGridView1.RowCount = row;
+                    //MessageBox.Show(col.ToString() + row.ToString());
 
                 }
             }
@@ -66,8 +79,11 @@ namespace WinFormsApp1
                     int col = 0;
                     while ((line = streamReader.ReadLine()) != null)
                     {
-                        for (int i = 0; i < dataGridView1.ColumnCount; i++)
-                        {   
+                        // Remove space
+                        line = line.Replace(" ", "");
+
+                        for (int i = 0; i < line.Length; i++)
+                        {
                             DataGridViewColumn column = dataGridView1.Columns[i];
                             column.Width = 55;
                             if (line[i] == 'K')
@@ -124,6 +140,8 @@ namespace WinFormsApp1
                 this.Height += 30;
                 resizeOnce = true;
             }
+
+            dataGridView1.ClearSelection();
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -146,47 +164,35 @@ namespace WinFormsApp1
         {
             Map defaultMap = new Map(convertToStringArray(settings1.mapfFile));
             Bfs algo = new Bfs(defaultMap);
-            int i = 0, j = 0;
             Tuple<List<string>, List<int[]>> result = algo.bfsearch();
 
-            
-            try
+            int row = 0; int col = 0;
+            int[] startPoint = defaultMap.getStartingPoint();
+            startPoint[0] -= 1;
+            startPoint[1] -= 1;
+
+            dataGridView1.Rows[startPoint[0]].Cells[startPoint[1]].Style.BackColor = Color.Green;
+            for (int i = 0; i < result.Item1.Count; i++)
             {
-                foreach (var node in result.Item2)
-                {
-                    i = node[0];
-                    j = node[1];
-                    dataGridView1.Rows[node[0]].Cells[node[1]].Style.BackColor = Color.Green;
-                }
+                Thread.Sleep(1000);
+                if()
             }
-            catch(ArgumentOutOfRangeException err){
-                String heh = i.ToString() + j.ToString(); ;
-                MessageBox.Show(heh);
-            }
+
         }
 
-        private string[,] convertToStringArray(String filename)
+        private string[,] convertToStringArray(string filename)
         {
-            String[] input = File.ReadAllLines(settings1.mapfFile);
+            string[] lines = File.ReadAllLines(settings1.mapfFile);
 
-            int i = 0, j = 0;
-            string[,] result = new string[input.Length, input[0].Length];
-            foreach (var row in input)
+            string[,] _map = new string[lines.GetLength(0), lines.ElementAt(0).Split(" ").Length];
+            for (int r = 0; r < lines.GetLength(0); r++)
             {
-                if(row != " ")
+                for (int c = 0; c < lines.ElementAt(r).Split(" ").Length; c++)
                 {
-                    j = 0;
-                    foreach (var col in row.Trim().Split(' '))
-                    {
-                        result[i, j] = col;
-                        j++;
-                    }
-                    i++;
+                    _map[r, c] = lines.ElementAt(r).Split(" ").ElementAt(c);
                 }
-                
             }
-
-            return result;
+            return _map;
         }
     }
 }
