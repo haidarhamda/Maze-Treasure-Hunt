@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Tubes_2;
 using Tubes_2.algorithms;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -167,13 +168,16 @@ namespace WinFormsApp1
 
 
             // Initialize map
-            Map defaultMap = new Map(convertToStringArray(settings1.mapfFile));
-            Tuple<List<int[]>, List<int[]>,bool> result = null;
-
-            if (defaultMap.getTreasureAmount() <= 0)
+            Map defaultMap = null;
+            try
             {
-                MessageBox.Show("Tidak ada treasure untuk dicari!");
+                defaultMap = new Map(convertToStringArray(settings1.mapfFile));
+             
+            }catch(Exception err)
+            {
+                MessageBox.Show(err.Message);
             }
+            Tuple<List<int[]>, List<int[]>, bool> result = null;
 
             if (settings1.algoChoice == 0)
             {
@@ -194,12 +198,13 @@ namespace WinFormsApp1
                 await task; 
                 double elapsed = (double)watch.ElapsedMilliseconds / 1000;
                 output1.execTime = elapsed.ToString();
-                //string test = "";
-                //for(int i = 0; i < result.Item2.Count; i++)
-                //{
-                //    test = test + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][0].ToString() + ")";
-                //}
-                //MessageBox.Show(test);
+                string test = "Nodes: ";
+                List<int[]> testing = result.Item2.Distinct().ToList();
+                for (int i = 0; i < result.Item2.Count; i++)
+                {
+                    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
+                }
+                MessageBox.Show(test);
                 output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
                 output1.steps = (result.Item1.Count - 1).ToString();
             }
