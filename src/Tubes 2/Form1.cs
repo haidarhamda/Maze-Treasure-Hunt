@@ -180,8 +180,10 @@ namespace WinFormsApp1
                     resizeOnce2 = true;
                 }
                 var watch = System.Diagnostics.Stopwatch.StartNew();
+
                 Bfs algo = new Bfs(defaultMap);
                 result = algo.bfsearch();
+
                 watch.Stop();
                 var task = startVisualizeAsync(result);
                 await task; 
@@ -194,7 +196,7 @@ namespace WinFormsApp1
                 //}
                 //MessageBox.Show(test);
                 output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
-                output1.steps = result.Item1.Count.ToString();
+                output1.steps = (result.Item1.Count - 1).ToString();
             }
             else if(settings1.algoChoice == 1)
             {
@@ -219,7 +221,7 @@ namespace WinFormsApp1
                 //}
                 //MessageBox.Show(test);
                 output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
-                output1.steps = result.Item1.Count.ToString();
+                output1.steps = (result.Item1.Count - 1).ToString();
             }
             else
             {
