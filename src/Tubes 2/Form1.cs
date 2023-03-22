@@ -154,6 +154,8 @@ namespace WinFormsApp1
             output1.steps = "None";
             output1.execTime = "None";
 
+            start_map_visual(sender, EventArgs.Empty);
+
             //Clear cell color
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -249,42 +251,42 @@ namespace WinFormsApp1
             {
                 repeatedNode = false;
 
-                if (dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Green || dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.DarkGreen)
+                if (dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Yellow || dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Orange)
                 {
                     repeatedNode = true;
                 }
 
                 dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Blue;
 
-                // check left
-                if ((result.Item2[i][1] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green)
-                {
-                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor = Color.Yellow;
-                }
-                // check right
-                if ((result.Item2[i][1]) < dataGridView1.ColumnCount && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green)
-                {
-                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor = Color.Yellow;
-                }
-                // check up
-                if ((result.Item2[i][0] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
-                {
-                    dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
-                }
-                // check down
-                if ((result.Item2[i][0]) < dataGridView1.RowCount && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
-                {
-                    dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
-                }
+                //// check left
+                //if ((result.Item2[i][1] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green)
+                //{
+                //    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor = Color.Yellow;
+                //}
+                //// check right
+                //if ((result.Item2[i][1]) < dataGridView1.ColumnCount && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green)
+                //{
+                //    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor = Color.Yellow;
+                //}
+                //// check up
+                //if ((result.Item2[i][0] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
+                //{
+                //    dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
+                //}
+                //// check down
+                //if ((result.Item2[i][0]) < dataGridView1.RowCount && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
+                //{
+                //    dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
+                //}
                 await Task.Delay((int)(settings1.delaySettings * 1000));
 
                 if (repeatedNode)
                 {
-                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.DarkGreen;
+                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Orange;
                 }
                 else
                 {
-                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Green;
+                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
                 }
 
             }
