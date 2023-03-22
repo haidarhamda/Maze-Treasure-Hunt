@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tubes_2.algorithms
 {
-    internal class Map
+    public class Map
     {
         protected string[,] map;
 
