@@ -170,6 +170,11 @@ namespace WinFormsApp1
             Map defaultMap = new Map(convertToStringArray(settings1.mapfFile));
             Tuple<List<int[]>, List<int[]>> result = null;
 
+            if (defaultMap.getTreasureAmount() <= 0)
+            {
+                MessageBox.Show("Tidak ada treasure untuk dicari!");
+            }
+
             if (settings1.algoChoice == 0)
             {
                 //MessageBox.Show(settings1.algoChoice.ToString());
@@ -266,7 +271,7 @@ namespace WinFormsApp1
                 {
                     dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
                 }
-                await Task.Delay(100);
+                await Task.Delay((int)(settings1.delaySettings * 1000));
 
                 if (repeatedNode)
                 {
@@ -321,7 +326,7 @@ namespace WinFormsApp1
                     }
 
                 }
-                await Task.Delay(50);
+                await Task.Delay((int)(settings1.delaySettings * 1000));
             }
 
             output1.route = routeDir;

@@ -21,12 +21,14 @@ namespace WinFormsApp1
         private String _mapFile;
         private int _algoChoice = -1;
         private bool _safeSettings = false;
+        private double _delaySettings = 0.01D;
 
         public event EventHandler SettingsChanged;
 
         public String mapfFile{ get; set; }
         public int algoChoice { get; set; }
         public bool safeSettings { get; set; }
+        public double delaySettings { get; set; }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -44,6 +46,9 @@ namespace WinFormsApp1
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            SliderTextBox.Text = "0.01 s";
+            algoChoice = -1;
+            delaySettings = 0.01D;
 
         }
 
@@ -80,6 +85,13 @@ namespace WinFormsApp1
             {
                 algoChoice = 0;
             }
+        }
+
+        private void DelaySlider_Scroll(object sender, EventArgs e)
+        {
+            double delayTime = Math.Round((DelaySlider.Value * 0.01D), 2);
+            delaySettings = delayTime;
+            SliderTextBox.Text = delayTime.ToString() + " s";
         }
     }
 }

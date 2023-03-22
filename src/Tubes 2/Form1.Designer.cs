@@ -96,7 +96,7 @@
             this.flowLayoutPanel1.Controls.Add(this.settings1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(27, 50);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(929, 656);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(929, 659);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // panel1
@@ -146,7 +146,7 @@
             this.settings1.mapfFile = null;
             this.settings1.Name = "settings1";
             this.settings1.safeSettings = false;
-            this.settings1.Size = new System.Drawing.Size(887, 139);
+            this.settings1.Size = new System.Drawing.Size(887, 163);
             this.settings1.TabIndex = 1;
             this.settings1.SettingsChanged += new System.EventHandler(this.start_map_visual);
             this.settings1.Load += new System.EventHandler(this.settings1_Load);
@@ -156,7 +156,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(968, 706);
+            this.ClientSize = new System.Drawing.Size(968, 709);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "Form1";

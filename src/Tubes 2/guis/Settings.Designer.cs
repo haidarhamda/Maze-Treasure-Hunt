@@ -35,6 +35,9 @@
             this.BFSButton = new System.Windows.Forms.RadioButton();
             this.DFSButton = new System.Windows.Forms.RadioButton();
             this.button2 = new System.Windows.Forms.Button();
+            this.DelaySlider = new System.Windows.Forms.TrackBar();
+            this.SliderTextBox = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.DelaySlider)).BeginInit();
             this.SuspendLayout();
             // 
             // FileLabel
@@ -121,11 +124,36 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // DelaySlider
+            // 
+            this.DelaySlider.LargeChange = 10;
+            this.DelaySlider.Location = new System.Drawing.Point(83, 123);
+            this.DelaySlider.Maximum = 100;
+            this.DelaySlider.Minimum = 1;
+            this.DelaySlider.Name = "DelaySlider";
+            this.DelaySlider.Size = new System.Drawing.Size(600, 56);
+            this.DelaySlider.TabIndex = 7;
+            this.DelaySlider.Value = 1;
+            this.DelaySlider.Scroll += new System.EventHandler(this.DelaySlider_Scroll);
+            // 
+            // SliderTextBox
+            // 
+            this.SliderTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SliderTextBox.Enabled = false;
+            this.SliderTextBox.Font = new System.Drawing.Font("Century Schoolbook", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.SliderTextBox.Location = new System.Drawing.Point(700, 123);
+            this.SliderTextBox.Name = "SliderTextBox";
+            this.SliderTextBox.Size = new System.Drawing.Size(72, 26);
+            this.SliderTextBox.TabIndex = 8;
+            this.SliderTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.SliderTextBox);
+            this.Controls.Add(this.DelaySlider);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.DFSButton);
             this.Controls.Add(this.BFSButton);
@@ -136,6 +164,7 @@
             this.Name = "Settings";
             this.Size = new System.Drawing.Size(935, 203);
             this.Load += new System.EventHandler(this.Settings_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DelaySlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,5 +179,7 @@
         private RadioButton BFSButton;
         private RadioButton DFSButton;
         private Button button2;
+        private TrackBar DelaySlider;
+        private TextBox SliderTextBox;
     }
 }
