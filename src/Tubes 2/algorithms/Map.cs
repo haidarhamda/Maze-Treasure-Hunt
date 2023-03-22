@@ -9,9 +9,11 @@ namespace Tubes_2.algorithms
     public class Map
     {
         protected string[,] map;
-
+        protected int treasureCount = 0;
+        protected int[] startingPoint = new int[2];
         public Map(string[,] map)
         {
+            int countK = 0;
             this.map = new string[map.GetLength(0) + 2, map.GetLength(1) + 2];
             for (int i = 0; i < map.GetLength(0) + 2; i++)
             {
@@ -29,12 +31,43 @@ namespace Tubes_2.algorithms
                         }
                         else
                         {
+                            if (map[i - 1, j - 1] != "X" && map[i - 1, j - 1] != "K" && map[i - 1, j - 1] != "T" && map[i - 1, j - 1] != "R")
+                            {
+                                throw new CharacterNotRecognizedException();
+                            }
                             this.map[i, j] = map[i - 1, j - 1];
+                            if (map[i - 1, j - 1] == "K")
+                            {
+                                countK++;
+                                if (countK > 1)
+                                {
+                                    throw new StartingPointExceededException();
+                                }
+                                this.startingPoint = new int[] { i, j };
+                                //Console.WriteLine(i.ToString()+" "+ j.ToString());
+                            }
+                            if (map[i - 1, j - 1] == "T")
+                            {
+                                this.treasureCount++;
+                            }
                         }
                     }
                 }
             }
+            if (countK == 0)
+            {
+                throw new NoStartingPointException();
+            }
+            if (treasureCount == 0)
+            {
+                throw new NoTreasureException();
+            }
             showMap();
+        }
+
+        public void setMap(int[] loc, string str)
+        {
+            this.map[loc[0], loc[1]] = str;
         }
 
         public string[,] getMap()

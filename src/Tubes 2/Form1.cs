@@ -168,7 +168,7 @@ namespace WinFormsApp1
 
             // Initialize map
             Map defaultMap = new Map(convertToStringArray(settings1.mapfFile));
-            Tuple<List<int[]>, List<int[]>> result = null;
+            Tuple<List<int[]>, List<int[]>,bool> result = null;
 
             if (settings1.algoChoice == 0)
             {
@@ -229,7 +229,7 @@ namespace WinFormsApp1
             }
         }
 
-        private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>> result)
+        private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>,bool> result)
         {
 
             // Show search route

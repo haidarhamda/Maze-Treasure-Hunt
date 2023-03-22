@@ -19,3 +19,24 @@ D:\Kuliah\SMT 4\Stima\Tubes\Tubes 2\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\ne
 D:\Kuliah\SMT 4\Stima\Tubes\Tubes 2\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\WinFormsApp1.Form1.resources
 D:\Kuliah\SMT 4\Stima\Tubes\Tubes 2\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\WinFormsApp1.Output.resources
 D:\Kuliah\SMT 4\Stima\Tubes\Tubes 2\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\WinFormsApp1.Settings.resources
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.csproj.AssemblyReference.cache
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\WinFormsApp1.Form1.resources
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\WinFormsApp1.Output.resources
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\WinFormsApp1.Settings.resources
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes_2.guis.UserControl1.resources
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes_2.Properties.Resources.resources
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.csproj.GenerateResource.cache
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.AssemblyInfoInputs.cache
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.AssemblyInfo.cs
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.dll
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\refint\Tubes 2.dll
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.pdb
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\bin\Debug\net6.0-windows\Tubes 2.exe
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\bin\Debug\net6.0-windows\Tubes 2.deps.json
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\bin\Debug\net6.0-windows\Tubes 2.runtimeconfig.json
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\bin\Debug\net6.0-windows\Tubes 2.dll
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\bin\Debug\net6.0-windows\Tubes 2.pdb
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.genruntimeconfig.cache
+C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\ref\Tubes 2.dll
