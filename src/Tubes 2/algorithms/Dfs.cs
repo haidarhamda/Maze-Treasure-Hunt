@@ -8,7 +8,7 @@ namespace Tubes_2.algorithms
     public partial class Dfs : Solver
     {
         public Dfs(Map map) : base(map) { }
-        public Tuple<List<int[]>, List<int[]>> dfsearch()
+        public Tuple<List<int[]>, List<int[]>, bool> dfsearch()
         {
             String[,] maze = this.map.getMap();
             int[] startingPoint = this.map.getStartingPoint();
@@ -18,6 +18,7 @@ namespace Tubes_2.algorithms
             List<List<int[]>> searchingRoute = new List<List<int[]>>();
             List<int[]> visited = new List<int[]>();
 
+            bool solved;
             int treasureGet = 0;
             List<int[]> temp = new List<int[]>();
             List<int[]> currentTop = new List<int[]>();
@@ -60,8 +61,13 @@ namespace Tubes_2.algorithms
             {
                 searchingRoute.Add(currentTop);
             }
+            if (treasureGet != nTreasure)
+            {
+                solved = false;
+            }
+            else solved = true;
 
-            return new Tuple<List<int[]>, List<int[]>>(optimizedRoute(solution), optimizedRoute(searchingRoute));
+            return new Tuple<List<int[]>, List<int[]>, bool>(optimizedRoute(solution), optimizedRoute(searchingRoute), solved);
         }
     }
 }

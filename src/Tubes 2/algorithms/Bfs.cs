@@ -9,7 +9,7 @@ namespace Tubes_2.algorithms
     public partial class Bfs : Solver
     {
         public Bfs(Map map) : base(map) { }
-        public Tuple<List<int[]>, List<int[]>> bfsearch()
+        public Tuple<List<int[]>, List<int[]>, bool> bfsearch()
         {
             String[,] maze = this.map.getMap();
             int[] startingPoint = this.map.getStartingPoint();
@@ -19,6 +19,7 @@ namespace Tubes_2.algorithms
             List<List<int[]>> route = new List<List<int[]>>();
             List<int[]> visited = new List<int[]>();
 
+            bool solved;
             int currentTreasure = 0;
             List<int[]> temp = new List<int[]>();
             List<int[]> currentTop = new List<int[]>();
@@ -57,9 +58,13 @@ namespace Tubes_2.algorithms
             {
                 route.Add(currentTop);
             }
+            if (currentTreasure != nTreasure)
+            {
+                solved = false;
+            }
+            else solved = true;
 
-
-            return new Tuple<List<int[]>, List<int[]>>(optimizedRoute(solution), optimizedRoute(route));
+            return new Tuple<List<int[]>, List<int[]>, bool>(optimizedRoute(solution), optimizedRoute(route), solved);
         }
     }
 }
