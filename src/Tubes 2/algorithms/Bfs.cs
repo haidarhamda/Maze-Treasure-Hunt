@@ -67,7 +67,7 @@ namespace Tubes_2.algorithms
         //    return new Tuple<List<int[]>, List<int[]>, bool>(optimizedRoute(solution), optimizedRoute(route), solved);
         //}
 
-        public Tuple<List<int[]>, List<int[]>,bool> bfsearch()
+        public Tuple<List<int[]>, List<int[]>, bool> bfsearch()
         {
             int[] startingPoint = this.map.getStartingPoint();
             Queue<Tuple<int[], List<int[]>>> q = new Queue<Tuple<int[], List<int[]>>>();
@@ -78,6 +78,7 @@ namespace Tubes_2.algorithms
             int[] nextNode = new int[2];
             List<int[]> path = new List<int[]>();
             bool solved = true;
+            List<int[]> visited2 = new List<int[]>();
             while (currentTreasure < totalTreasure)
             {
 
@@ -125,6 +126,7 @@ namespace Tubes_2.algorithms
                         }
                     }
                 }
+                visited2.AddRange(visited);
                 q.Clear();
                 visited.Clear();
                 if (currentTreasure < totalTreasure)
@@ -137,7 +139,7 @@ namespace Tubes_2.algorithms
             {
                 solved = false;
             }
-            return new Tuple<List<int[]>, List<int[]>,bool>(path, visited,solved);
+            return new Tuple<List<int[]>, List<int[]>, bool>(path, visited2, solved);
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\stima\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\stima\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\stima\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj",
         "projectName": "Tubes 2",
-        "projectPath": "C:\\Users\\User\\Documents\\stima\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Tubes2_DuelisSejati\\src\\Tubes 2\\Tubes 2.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\stima\\Tubes2_DuelisSejati\\src\\Tubes 2\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Tubes2_DuelisSejati\\src\\Tubes 2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
