@@ -37,6 +37,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.DelaySlider = new System.Windows.Forms.TrackBar();
             this.SliderTextBox = new System.Windows.Forms.TextBox();
+            this.TSPButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.DelaySlider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +90,7 @@
             // 
             this.BFSButton.AutoSize = true;
             this.BFSButton.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.BFSButton.Location = new System.Drawing.Point(566, 64);
+            this.BFSButton.Location = new System.Drawing.Point(531, 64);
             this.BFSButton.Name = "BFSButton";
             this.BFSButton.Size = new System.Drawing.Size(62, 23);
             this.BFSButton.TabIndex = 4;
@@ -102,7 +103,7 @@
             // 
             this.DFSButton.AutoSize = true;
             this.DFSButton.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.DFSButton.Location = new System.Drawing.Point(673, 64);
+            this.DFSButton.Location = new System.Drawing.Point(619, 64);
             this.DFSButton.Name = "DFSButton";
             this.DFSButton.Size = new System.Drawing.Size(64, 23);
             this.DFSButton.TabIndex = 5;
@@ -147,11 +148,25 @@
             this.SliderTextBox.TabIndex = 8;
             this.SliderTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // TSPButton
+            // 
+            this.TSPButton.AutoSize = true;
+            this.TSPButton.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.TSPButton.Location = new System.Drawing.Point(700, 64);
+            this.TSPButton.Name = "TSPButton";
+            this.TSPButton.Size = new System.Drawing.Size(62, 23);
+            this.TSPButton.TabIndex = 9;
+            this.TSPButton.TabStop = true;
+            this.TSPButton.Text = "TSP";
+            this.TSPButton.UseVisualStyleBackColor = true;
+            this.TSPButton.CheckedChanged += new System.EventHandler(this.TSPButton_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.TSPButton);
             this.Controls.Add(this.SliderTextBox);
             this.Controls.Add(this.DelaySlider);
             this.Controls.Add(this.button2);
@@ -181,5 +196,6 @@
         private Button button2;
         private TrackBar DelaySlider;
         private TextBox SliderTextBox;
+        private RadioButton TSPButton;
     }
 }

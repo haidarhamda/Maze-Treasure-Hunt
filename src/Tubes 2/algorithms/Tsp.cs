@@ -12,13 +12,14 @@ namespace Tubes_2.algorithms
     {
         public Tsp(Map map) : base(map) { }
 
-        public Tuple<List<int[]>, List<int[]>> tsproblem()
+        public Tuple<List<int[]>, List<int[]>, bool> tsproblem()
         {
+            Dfs dfs = new Dfs(this.map);
+            Tuple<List<int[]>, List<int[]>, bool> dfsResult = dfs.dfsearch();
+
             Bfs bfs = new Bfs(this.map);
             Tuple<List<int[]>, List<int[]>, bool> bfsResult = bfs.bfsearch();
 
-            Dfs dfs = new Dfs(this.map);
-            Tuple<List<int[]>, List<int[]>, bool> dfsResult = dfs.dfsearch();
 
             Tuple<List<int[]>, List<int[]>> searchResult;
 
@@ -39,7 +40,7 @@ namespace Tubes_2.algorithms
             tspSolution.AddRange(routeBack.Item1);
             tspSearching.AddRange(routeBack.Item2);
 
-            return new Tuple<List<int[]>, List<int[]>>(tspSolution, tspSearching);
+            return new Tuple<List<int[]>, List<int[]>, bool>(tspSolution, tspSearching, false);
         }
 
         public Tuple<List<int[]>, List<int[]>> getRouteBack(int[] current)
@@ -59,7 +60,7 @@ namespace Tubes_2.algorithms
             int[] currentNode;
 
             nodeStack.Push(new List<int[]> { current });
-            direction.Reverse();
+            Array.Reverse(direction);
 
             while (nodeStack.Count > 0 && !back)
             {

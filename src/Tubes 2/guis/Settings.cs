@@ -69,10 +69,6 @@ namespace WinFormsApp1
             {
                 algoChoice = 0;
             }
-            else
-            {
-                algoChoice = 1;
-            }
         }
 
         private void DFSButton_CheckedChanged(object sender, EventArgs e)
@@ -81,10 +77,6 @@ namespace WinFormsApp1
             {
                 algoChoice = 1;
             }
-            else
-            {
-                algoChoice = 0;
-            }
         }
 
         private void DelaySlider_Scroll(object sender, EventArgs e)
@@ -92,6 +84,14 @@ namespace WinFormsApp1
             double delayTime = Math.Round((DelaySlider.Value * 0.01D), 2);
             delaySettings = delayTime;
             SliderTextBox.Text = delayTime.ToString() + " s";
+        }
+
+        private void TSPButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(TSPButton.Checked)
+            {
+                algoChoice = 2;
+            }
         }
     }
 }

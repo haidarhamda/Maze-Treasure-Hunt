@@ -249,6 +249,37 @@ namespace WinFormsApp1
                 output1.nodes = countUnique(result.Item2).ToString();
                 output1.steps = (result.Item1.Count - 1).ToString();
             }
+            else if(settings1.algoChoice == 2)
+            {
+                if (!resizeOnce2)
+                {
+                    panel1.Height += 120;
+                    this.Height += 120;
+                    resizeOnce2 = true;
+                }
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                Tsp algo = new Tsp(defaultMap);
+                Tuple<List<int[]>, List<int[]>, bool> resultTSP = algo.tsproblem();
+
+
+                //MessageBox.Show("test");
+                watch.Stop();
+                var task = startVisualizeAsync(resultTSP);
+                await task;
+                double elapsed = (double)watch.ElapsedMilliseconds / 1000;
+                output1.execTime = elapsed.ToString();
+                string test = "Nodes: ";
+                //List<int[]> testing = result.Item2.Distinct().ToList();
+                //for (int i = 0; i < result.Item2.Count; i++)
+                //{
+                //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
+                //}
+                //MessageBox.Show(test);
+                output1.nodes = countUnique(resultTSP.Item2).ToString();
+                output1.steps = (resultTSP.Item1.Count - 1).ToString();
+
+            }
             else
             {
                 MessageBox.Show("Pilih algoritma pencarian yang ingin digunakan terlebih dahulu!");
@@ -325,17 +356,17 @@ namespace WinFormsApp1
             }
 
 
-            //Clear yellow
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            {
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                {
-                    if (dataGridView1.Rows[i].Cells[j].Style.BackColor == Color.Yellow)
-                    {
-                        dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
-                    }
-                }
-            }
+            ////Clear yellow
+            //for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            //{
+            //    for (int j = 0; j < dataGridView1.Columns.Count; j++)
+            //    {
+            //        if (dataGridView1.Rows[i].Cells[j].Style.BackColor == Color.Yellow)
+            //        {
+            //            dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
+            //        }
+            //    }
+            //}
 
             // Show solution
             string routeDir = "";
