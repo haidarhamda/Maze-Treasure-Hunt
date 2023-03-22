@@ -5,10 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace Tubes_2.algorithms
 {
-    enum Move
-    {
-        Left, Up, Right, Down
-    }
     internal class Dfs
     {
         private Map map;
@@ -20,7 +16,7 @@ namespace Tubes_2.algorithms
 
         public Tuple<List<int[]>, List<int[]>> dfsearch()
         {
-            String[,] maze = this.map.GetMap();
+            String[,] maze = this.map.getMap();
             int[] startingPoint = this.map.getStartingPoint();
             int nTreasure = this.map.getTreasureAmount();
             Stack<List<int[]>> nodeStack = new Stack<List<int[]>>();

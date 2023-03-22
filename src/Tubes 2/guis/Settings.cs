@@ -19,7 +19,7 @@ namespace WinFormsApp1
         }
 
         private String _mapFile;
-        private int _algoChoice;
+        private int _algoChoice = -1;
         private bool _safeSettings = false;
 
         public event EventHandler SettingsChanged;

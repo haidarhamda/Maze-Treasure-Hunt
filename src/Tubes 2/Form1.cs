@@ -146,8 +146,24 @@ namespace WinFormsApp1
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            
-            if(settings1.algoChoice == 0)
+            //Clear cell color
+            for(int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for(int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    if(dataGridView1.Rows[i].Cells[j].Style.BackColor != Color.Black)
+                    {
+                        dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
+                    }
+                }
+            }
+
+
+            // Initialize map
+            Map defaultMap = new Map(convertToStringArray(settings1.mapfFile));
+            Tuple<List<int[]>, List<int[]>> result = null;
+
+            if (settings1.algoChoice == 0)
             {
                 //MessageBox.Show(settings1.algoChoice.ToString());
                 if (!resizeOnce2)
@@ -156,69 +172,109 @@ namespace WinFormsApp1
                     this.Height += 120;
                     resizeOnce2 = true;
                 }
-                startBFS();
+                Bfs algo = new Bfs(defaultMap);
+                result = algo.bfsearch();
+                startVisualizeAsync(result);
+            }else if(settings1.algoChoice == 1)
+            {
+                if (!resizeOnce2)
+                {
+                    panel1.Height += 120;
+                    this.Height += 120;
+                    resizeOnce2 = true;
+                }
+                Dfs algo = new Dfs(defaultMap);
+                result = algo.dfsearch();
+                startVisualizeAsync(result);
+            }
+            else
+            {
+                MessageBox.Show("Pilih algoritma pencarian yang ingin digunakan terlebih dahulu!");
             }
         }
 
-        private async void startBFS()
+        private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>> result)
         {
-            Map defaultMap = new Map(convertToStringArray(settings1.mapfFile));
-            Bfs algo = new Bfs(defaultMap);
-            Tuple<List<string>, List<int[]>> result = algo.bfsearch();
-            string rou = "";
-            string points = "";
-            for(int i = 0; i < result.Item1.Count; i++)
-            {
-                rou += result.Item1[i].ToString();
-                rou += " ";
-            }
-            //MessageBox.Show(rou);
-            for (int i = 0; i < result.Item2.Count; i++)
-            {
-                points = points + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][1].ToString() + ") ";
-            }
-            //MessageBox.Show(points);
-            int row = 0; int col = 0;
-            int[] startPoint = defaultMap.getStartingPoint();
-            startPoint[0] -= 1;
-            startPoint[1] -= 1;
+            
 
 
-            //int row = result.Item2[0];
-            //dataGridView1.Rows[result.Item2[1] - 1].Cells[startPoint[1]].Style.BackColor = Color.Green;
+            // Show search route
+            showSearchRouteAsync(result);
+            
+
+            //Clear yellow
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    if (dataGridView1.Rows[i].Cells[j].Style.BackColor == Color.Yellow)
+                    {
+                        dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
+                    }
+                }
+            }
+
+            // Show solution
+            showSolutionRouteAsync(result);
+        }
+
+        private async Task showSolutionRouteAsync(Tuple<List<int[]>, List<int[]>> result)
+        {
+            for (int i = 0; i < result.Item1.Count; i++)
+            {
+                dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
+                await Task.Delay(250);
+            }
+        }
+
+        private async Task showSearchRouteAsync(Tuple<List<int[]>, List<int[]>> result)
+        {
+            bool repeatedNode;
+
             for (int i = 0; i < result.Item2.Count; i++)
             {
-                //Thread.Sleep(1000);
-                dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Green;
-                
+                repeatedNode = false;
+
+                if (dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Green || dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.DarkGreen)
+                {
+                    repeatedNode = true;
+                }
+
+                dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Blue;
+
                 // check left
-                if((result.Item2[i][1] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green)
+                if ((result.Item2[i][1] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green)
                 {
                     dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor = Color.Yellow;
                 }
                 // check right
-                if ((result.Item2[i][1]) < dataGridView1.ColumnCount && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green)
+                if ((result.Item2[i][1]) < dataGridView1.ColumnCount && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green)
                 {
                     dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor = Color.Yellow;
                 }
                 // check up
-                if ((result.Item2[i][0] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
+                if ((result.Item2[i][0] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
                 {
                     dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
                 }
                 // check down
-                if ((result.Item2[i][0]) < dataGridView1.RowCount && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
+                if ((result.Item2[i][0]) < dataGridView1.RowCount && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
                 {
                     dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
                 }
-                await Task.Delay(1000);
+                await Task.Delay(500);
+
+                if (repeatedNode)
+                {
+                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.DarkGreen;
+                }
+                else
+                {
+                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Green;
+                }
+
             }
-
-            output1.route = rou;
-            output1.nodes = result.Item2.Count.ToString();
-
         }
-
         private string[,] convertToStringArray(string filename)
         {
             string[] lines = File.ReadAllLines(settings1.mapfFile);

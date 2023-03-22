@@ -20,7 +20,7 @@ namespace Tubes_2.algorithms
         }
         public Tuple<List<int[]>, List<int[]>> bfsearch()
         {
-            String[,] maze = this.map.GetMap();
+            String[,] maze = this.map.getMap();
             int[] startingPoint = this.map.getStartingPoint();
             int nTreasure = this.map.getTreasureAmount();
             Queue<List<int[]>> nodeQueue = new Queue<List<int[]>>();
