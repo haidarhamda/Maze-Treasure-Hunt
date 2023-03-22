@@ -266,7 +266,7 @@ namespace WinFormsApp1
                 {
                     dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
                 }
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 if (repeatedNode)
                 {
@@ -321,7 +321,7 @@ namespace WinFormsApp1
                     }
 
                 }
-                await Task.Delay(250);
+                await Task.Delay(50);
             }
 
             output1.route = routeDir;

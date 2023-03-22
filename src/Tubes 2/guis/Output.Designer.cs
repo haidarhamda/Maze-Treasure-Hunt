@@ -42,7 +42,7 @@
             // 
             this.RouteLabel.AutoSize = true;
             this.RouteLabel.Font = new System.Drawing.Font("Century Schoolbook", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RouteLabel.Location = new System.Drawing.Point(47, 35);
+            this.RouteLabel.Location = new System.Drawing.Point(27, 35);
             this.RouteLabel.Name = "RouteLabel";
             this.RouteLabel.Size = new System.Drawing.Size(73, 21);
             this.RouteLabel.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             this.NodesLabel.AutoSize = true;
             this.NodesLabel.Font = new System.Drawing.Font("Century Schoolbook", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.NodesLabel.Location = new System.Drawing.Point(47, 93);
+            this.NodesLabel.Location = new System.Drawing.Point(29, 93);
             this.NodesLabel.Name = "NodesLabel";
             this.NodesLabel.Size = new System.Drawing.Size(69, 21);
             this.NodesLabel.TabIndex = 1;
@@ -84,9 +84,9 @@
             this.RouteTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.RouteTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.RouteTextBox.Font = new System.Drawing.Font("Century Schoolbook", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RouteTextBox.Location = new System.Drawing.Point(137, 35);
+            this.RouteTextBox.Location = new System.Drawing.Point(99, 35);
             this.RouteTextBox.Name = "RouteTextBox";
-            this.RouteTextBox.Size = new System.Drawing.Size(381, 21);
+            this.RouteTextBox.Size = new System.Drawing.Size(453, 21);
             this.RouteTextBox.TabIndex = 4;
             this.RouteTextBox.TextChanged += new System.EventHandler(this.RouteTextBox_TextChanged);
             // 
@@ -95,9 +95,9 @@
             this.NodesTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.NodesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NodesTextBox.Font = new System.Drawing.Font("Century Schoolbook", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.NodesTextBox.Location = new System.Drawing.Point(137, 93);
+            this.NodesTextBox.Location = new System.Drawing.Point(99, 93);
             this.NodesTextBox.Name = "NodesTextBox";
-            this.NodesTextBox.Size = new System.Drawing.Size(381, 21);
+            this.NodesTextBox.Size = new System.Drawing.Size(453, 21);
             this.NodesTextBox.TabIndex = 5;
             // 
             // StepsTextBox
