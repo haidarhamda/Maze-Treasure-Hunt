@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Tubes_2.algorithms;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -144,10 +145,16 @@ namespace WinFormsApp1
             dataGridView1.ClearSelection();
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private async void searchButton_Click(object sender, EventArgs e)
         {
+            // Clear output
+            output1.route = "None";
+            output1.nodes = "None";
+            output1.steps = "None";
+            output1.execTime = "None";
+
             //Clear cell color
-            for(int i = 0; i < dataGridView1.Rows.Count; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 for(int j = 0; j < dataGridView1.Columns.Count; j++)
                 {
@@ -172,10 +179,24 @@ namespace WinFormsApp1
                     this.Height += 120;
                     resizeOnce2 = true;
                 }
+                var watch = System.Diagnostics.Stopwatch.StartNew();
                 Bfs algo = new Bfs(defaultMap);
                 result = algo.bfsearch();
-                startVisualizeAsync(result);
-            }else if(settings1.algoChoice == 1)
+                watch.Stop();
+                var task = startVisualizeAsync(result);
+                await task; 
+                double elapsed = (double)watch.ElapsedMilliseconds / 1000;
+                output1.execTime = elapsed.ToString();
+                //string test = "";
+                //for(int i = 0; i < result.Item2.Count; i++)
+                //{
+                //    test = test + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][0].ToString() + ")";
+                //}
+                //MessageBox.Show(test);
+                output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
+                output1.steps = result.Item1.Count.ToString();
+            }
+            else if(settings1.algoChoice == 1)
             {
                 if (!resizeOnce2)
                 {
@@ -183,9 +204,22 @@ namespace WinFormsApp1
                     this.Height += 120;
                     resizeOnce2 = true;
                 }
+                var watch = System.Diagnostics.Stopwatch.StartNew();
                 Dfs algo = new Dfs(defaultMap);
                 result = algo.dfsearch();
-                startVisualizeAsync(result);
+                watch.Stop();
+                var task = startVisualizeAsync(result);
+                await task;
+                double elapsed = (double)watch.ElapsedMilliseconds / 1000;
+                output1.execTime = elapsed.ToString();
+                //string test = "";
+                //for (int i = 0; i < result.Item2.Count; i++)
+                //{
+                //    test = test + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][1].ToString() + ")";
+                //}
+                //MessageBox.Show(test);
+                output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
+                output1.steps = result.Item1.Count.ToString();
             }
             else
             {
@@ -195,40 +229,8 @@ namespace WinFormsApp1
 
         private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>> result)
         {
-            
-
 
             // Show search route
-            showSearchRouteAsync(result);
-            
-
-            //Clear yellow
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            {
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                {
-                    if (dataGridView1.Rows[i].Cells[j].Style.BackColor == Color.Yellow)
-                    {
-                        dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
-                    }
-                }
-            }
-
-            // Show solution
-            showSolutionRouteAsync(result);
-        }
-
-        private async Task showSolutionRouteAsync(Tuple<List<int[]>, List<int[]>> result)
-        {
-            for (int i = 0; i < result.Item1.Count; i++)
-            {
-                dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
-                await Task.Delay(250);
-            }
-        }
-
-        private async Task showSearchRouteAsync(Tuple<List<int[]>, List<int[]>> result)
-        {
             bool repeatedNode;
 
             for (int i = 0; i < result.Item2.Count; i++)
@@ -274,7 +276,57 @@ namespace WinFormsApp1
                 }
 
             }
+
+
+            //Clear yellow
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    if (dataGridView1.Rows[i].Cells[j].Style.BackColor == Color.Yellow)
+                    {
+                        dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
+                    }
+                }
+            }
+
+            // Show solution
+            string routeDir = "";
+            for (int i = 0; i < result.Item1.Count; i++)
+            {
+                dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
+                if(i != (result.Item1.Count - 1))
+                {
+                    // Down
+                    if(result.Item1[i + 1][0] - 1 > result.Item1[i][0] - 1)
+                    {
+                        routeDir += "D ";
+                    }
+                    // Up
+                    else if(result.Item1[i + 1][0] - 1 < result.Item1[i][0] - 1)
+                    {
+                        routeDir += "U ";
+                    }
+                    // Left
+                    else if (result.Item1[i + 1][1] - 1 < result.Item1[i][1] - 1)
+                    {
+                        routeDir += "L ";
+                    }
+                    // Right
+                    else
+                    {
+                        routeDir += "R ";
+                    }
+
+                }
+                await Task.Delay(250);
+            }
+
+            output1.route = routeDir;
+            //output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
+            //output1.steps = result.Item1.Count.ToString();
         }
+
         private string[,] convertToStringArray(string filename)
         {
             string[] lines = File.ReadAllLines(settings1.mapfFile);

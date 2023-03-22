@@ -88,7 +88,7 @@
             this.RouteTextBox.Name = "RouteTextBox";
             this.RouteTextBox.Size = new System.Drawing.Size(381, 21);
             this.RouteTextBox.TabIndex = 4;
-            this.RouteTextBox.Text = "0";
+            this.RouteTextBox.TextChanged += new System.EventHandler(this.RouteTextBox_TextChanged);
             // 
             // NodesTextBox
             // 
@@ -99,7 +99,6 @@
             this.NodesTextBox.Name = "NodesTextBox";
             this.NodesTextBox.Size = new System.Drawing.Size(381, 21);
             this.NodesTextBox.TabIndex = 5;
-            this.NodesTextBox.Text = "0";
             // 
             // StepsTextBox
             // 
@@ -110,7 +109,6 @@
             this.StepsTextBox.Name = "StepsTextBox";
             this.StepsTextBox.Size = new System.Drawing.Size(209, 21);
             this.StepsTextBox.TabIndex = 6;
-            this.StepsTextBox.Text = "0";
             // 
             // ExecTimeTextBox
             // 
@@ -121,7 +119,6 @@
             this.ExecTimeTextBox.Name = "ExecTimeTextBox";
             this.ExecTimeTextBox.Size = new System.Drawing.Size(196, 21);
             this.ExecTimeTextBox.TabIndex = 7;
-            this.ExecTimeTextBox.Text = "0";
             // 
             // Output
             // 
@@ -138,6 +135,7 @@
             this.Controls.Add(this.RouteLabel);
             this.Name = "Output";
             this.Size = new System.Drawing.Size(935, 150);
+            this.Load += new System.EventHandler(this.Output_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

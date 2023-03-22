@@ -27,19 +27,35 @@ namespace WinFormsApp1
             get { return _route; }
             set {_route = value; RouteTextBox.Text = _route; } 
         }
-        public String execTime { get; set; }
+        public String execTime
+        {
+            get { return _execTime; }
+            set { _execTime = value; ExecTimeTextBox.Text = _execTime; }
+        }
         public String nodes 
         {
             get { return _nodes; }
             set { _nodes = value; NodesTextBox.Text = _nodes; }
         }
-        public String steps { get; set; }
+        public String steps
+        {
+            get { return _steps; }
+            set { _steps = value; StepsTextBox.Text = _steps; }
+        }
 
         private void StepsLabel_Click(object sender, EventArgs e)
         {
 
         }
 
+        private void Output_Load(object sender, EventArgs e)
+        {
 
+        }
+
+        private void RouteTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
