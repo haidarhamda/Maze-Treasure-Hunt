@@ -1,3 +1,4 @@
+using System.Drawing.Design;
 using System.IO;
 using System.Linq.Expressions;
 using System.Text;
@@ -17,6 +18,19 @@ namespace WinFormsApp1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private static int countUnique(List<int[]> nodes)
+        {
+            List<int[]> result = new List<int[]>();
+            foreach (int[] node in nodes)
+            {
+                if (!util.isVisited(result, node))
+                {
+                    result.Add(node);
+                }
+            }
+            return result.Count;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -201,13 +215,13 @@ namespace WinFormsApp1
                 double elapsed = (double)watch.ElapsedMilliseconds / 1000;
                 output1.execTime = elapsed.ToString();
                 string test = "Nodes: ";
-                List<int[]> testing = result.Item2.Distinct().ToList();
-                for (int i = 0; i < result.Item2.Count; i++)
-                {
-                    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
-                }
-                MessageBox.Show(test);
-                output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
+                //List<int[]> testing = result.Item2.Distinct().ToList();
+                //for (int i = 0; i < result.Item2.Count; i++)
+                //{
+                //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
+                //}
+                //MessageBox.Show(test);
+                output1.nodes = countUnique(result.Item2).ToString();
                 output1.steps = (result.Item1.Count - 1).ToString();
             }
             else if(settings1.algoChoice == 1)
@@ -232,7 +246,7 @@ namespace WinFormsApp1
                 //    test = test + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][1].ToString() + ")";
                 //}
                 //MessageBox.Show(test);
-                output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
+                output1.nodes = countUnique(result.Item2).ToString();
                 output1.steps = (result.Item1.Count - 1).ToString();
             }
             else
@@ -240,6 +254,25 @@ namespace WinFormsApp1
                 MessageBox.Show("Pilih algoritma pencarian yang ingin digunakan terlebih dahulu!");
             }
         }
+
+        private bool isBeside(int[] current, int[] next)
+        {
+            if (current[0] == next[0])
+            {
+                if (Math.Abs(current[1] - next[1]) == 1)
+                {
+                    return true;
+                }
+            }
+            else if (current[1] == next[1])
+            {
+                if (Math.Abs(current[0] - next[0]) == 1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        } 
 
         private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>,bool> result)
         {
@@ -311,26 +344,31 @@ namespace WinFormsApp1
                 dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
                 if(i != (result.Item1.Count - 1))
                 {
-                    // Down
-                    if(result.Item1[i + 1][0] - 1 > result.Item1[i][0] - 1)
+                    if (isBeside(result.Item1[i + 1], result.Item1[i]))
                     {
-                        routeDir += "D ";
+                        // Down
+                        if (result.Item1[i + 1][0] - 1 > result.Item1[i][0] - 1)
+                        {
+                            routeDir += "D ";
+                        }
+                        // Up
+                        else if (result.Item1[i + 1][0] - 1 < result.Item1[i][0] - 1)
+                        {
+                            routeDir += "U ";
+                        }
+                        // Left
+                        else if (result.Item1[i + 1][1] - 1 < result.Item1[i][1] - 1)
+                        {
+                            routeDir += "L ";
+                        }
+                        // Right
+                        else
+                        {
+                            routeDir += "R ";
+                        }
                     }
-                    // Up
-                    else if(result.Item1[i + 1][0] - 1 < result.Item1[i][0] - 1)
-                    {
-                        routeDir += "U ";
-                    }
-                    // Left
-                    else if (result.Item1[i + 1][1] - 1 < result.Item1[i][1] - 1)
-                    {
-                        routeDir += "L ";
-                    }
-                    // Right
-                    else
-                    {
-                        routeDir += "R ";
-                    }
+                    else routeDir += "T";
+                    
 
                 }
                 await Task.Delay((int)(settings1.delaySettings * 1000));

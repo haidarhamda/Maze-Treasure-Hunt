@@ -11,6 +11,24 @@ namespace Tubes_2.algorithms
         Left, Up, Right, Down
     }
 
+    public static class util
+    {
+        public static bool visited;
+
+        public static bool isVisited(List<int[]> visited, int[] node)
+        {
+            foreach (var Node in visited)
+            {
+                if (Node[0] == node[0] && Node[1] == node[1])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
     public class Solver
     {
         public Map map;
