@@ -160,23 +160,62 @@ namespace WinFormsApp1
             }
         }
 
-        private void startBFS()
+        private async void startBFS()
         {
             Map defaultMap = new Map(convertToStringArray(settings1.mapfFile));
             Bfs algo = new Bfs(defaultMap);
             Tuple<List<string>, List<int[]>> result = algo.bfsearch();
-
+            string rou = "";
+            string points = "";
+            for(int i = 0; i < result.Item1.Count; i++)
+            {
+                rou += result.Item1[i].ToString();
+                rou += " ";
+            }
+            //MessageBox.Show(rou);
+            for (int i = 0; i < result.Item2.Count; i++)
+            {
+                points = points + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][1].ToString() + ") ";
+            }
+            //MessageBox.Show(points);
             int row = 0; int col = 0;
             int[] startPoint = defaultMap.getStartingPoint();
             startPoint[0] -= 1;
             startPoint[1] -= 1;
 
-            dataGridView1.Rows[startPoint[0]].Cells[startPoint[1]].Style.BackColor = Color.Green;
-            for (int i = 0; i < result.Item1.Count; i++)
+
+            //int row = result.Item2[0];
+            //dataGridView1.Rows[result.Item2[1] - 1].Cells[startPoint[1]].Style.BackColor = Color.Green;
+            for (int i = 0; i < result.Item2.Count; i++)
             {
-                Thread.Sleep(1000);
-                if()
+                //Thread.Sleep(1000);
+                dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Green;
+                
+                // check left
+                if((result.Item2[i][1] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green)
+                {
+                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor = Color.Yellow;
+                }
+                // check right
+                if ((result.Item2[i][1]) < dataGridView1.ColumnCount && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green)
+                {
+                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor = Color.Yellow;
+                }
+                // check up
+                if ((result.Item2[i][0] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
+                {
+                    dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
+                }
+                // check down
+                if ((result.Item2[i][0]) < dataGridView1.RowCount && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
+                {
+                    dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
+                }
+                await Task.Delay(1000);
             }
+
+            output1.route = rou;
+            output1.nodes = result.Item2.Count.ToString();
 
         }
 

@@ -67,6 +67,7 @@
             this.StepsLabel.Size = new System.Drawing.Size(62, 21);
             this.StepsLabel.TabIndex = 2;
             this.StepsLabel.Text = "Steps:";
+            this.StepsLabel.Click += new System.EventHandler(this.StepsLabel_Click);
             // 
             // ExecTimeLabel
             // 
