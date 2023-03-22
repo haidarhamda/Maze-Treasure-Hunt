@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Tubes_2.algorithms
 {
@@ -10,78 +9,69 @@ namespace Tubes_2.algorithms
     {
         Left, Up, Right, Down
     }
-    internal class Bfs
+    internal class Dfs
     {
         private Map map;
 
-        public Bfs(Map map)
+        public Dfs(Map map)
         {
             this.map = map;
         }
-        public Tuple<List<int[]>, List<int[]>> bfsearch()
+
+        public Tuple<List<int[]>, List<int[]>> dfsearch()
         {
             String[,] maze = this.map.GetMap();
             int[] startingPoint = this.map.getStartingPoint();
             int nTreasure = this.map.getTreasureAmount();
-            Queue<List<int[]>> nodeQueue = new Queue<List<int[]>>();
+            Stack<List<int[]>> nodeStack = new Stack<List<int[]>>();
             List<List<int[]>> solution = new List<List<int[]>>();
-            List<List<int[]>> route = new List<List<int[]>>();
+            List<List<int[]>> searchingRoute = new List<List<int[]>>();
             List<int[]> visited = new List<int[]>();
 
-            int currentTreasure = 0;
+            int treasureGet = 0;
             List<int[]> temp = new List<int[]>();
             List<int[]> currentTop = new List<int[]>();
             int[] currentNode;
 
-            nodeQueue.Enqueue(new List<int[]> { startingPoint });
+            nodeStack.Push(new List<int[]> { startingPoint });
 
-            while (nodeQueue.Count > 0 && currentTreasure != nTreasure)
+            while (nodeStack.Count > 0 && treasureGet != nTreasure)
             {
-                currentTop = nodeQueue.Dequeue();
+                currentTop = nodeStack.Pop();
                 currentNode = currentTop[currentTop.Count - 1];
                 temp = currentTop.ToList();
 
                 visited.Add(currentNode);
-                route.Add(currentTop);
+
+                if (!isBranched(maze, visited, currentNode))
+                {
+                    searchingRoute.Add(currentTop);
+                }
 
                 if (maze[currentNode[0], currentNode[1]] == "T")
                 {
                     solution.Add(currentTop);
-                    currentTreasure++;
+                    treasureGet++;
                 }
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 3; i > -1; i--)
                 {
                     int[] nextNode = getNextNode(currentNode, i);
                     if (maze[nextNode[0], nextNode[1]] != "X" && !isVisited(visited, nextNode))
                     {
                         temp.Add(nextNode);
-                        nodeQueue.Enqueue(new List<int[]>(temp));
+                        nodeStack.Push(new List<int[]>(temp));
                         temp.RemoveAt(temp.Count - 1);
                     }
                 }
                 temp.Clear();
             }
-            if (!route.Contains(currentTop))
+            if (!searchingRoute.Contains(currentTop))
             {
-                route.Add(currentTop);
+                searchingRoute.Add(currentTop);
             }
 
-
-            return new Tuple<List<int[]>, List<int[]>>(optimizedRoute(solution), optimizedRoute(route));
-        }
-
-        bool isVisited(List<int[]> visited, int[] node)
-        {
-            foreach (var Node in visited)
-            {
-                if (Node[0] == node[0] && Node[1] == node[1])
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return new Tuple<List<int[]>, List<int[]>>(optimizedRoute(solution), optimizedRoute(searchingRoute));
         }
 
         int[] getNextNode(int[] currentNode, int i)
@@ -108,6 +98,19 @@ namespace Tubes_2.algorithms
             }
 
             return nextNode;
+        }
+
+        public bool isVisited(List<int[]> visited, int[] node)
+        {
+            foreach (var Node in visited)
+            {
+                if (Node[0] == node[0] && Node[1] == node[1])
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public bool isBranched(String[,] maze, List<int[]> visited, int[] node)
@@ -185,6 +188,6 @@ namespace Tubes_2.algorithms
             }
             return result;
         }
-
     }
 }
+
