@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,6 +78,25 @@ namespace Tubes_2.algorithms
             return false;
         }
 
+        public bool isBeside(int[] currentnode, int[] nextnode)
+        {
+            if (currentnode[0] == nextnode[0])
+            {
+                if (Math.Abs(currentnode[1] - nextnode[1]) == 1)
+                {
+                    return true;
+                }
+            }
+            else if (currentnode[1] == nextnode[1])
+            {
+                if (Math.Abs(currentnode[0] - nextnode[0]) == 1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         protected bool isBranched(String[,] maze, List<int[]> visited, int[] node)
         {
             int branch = 0;
@@ -105,11 +125,17 @@ namespace Tubes_2.algorithms
 
         }
 
-        protected List<int[]> optimizedRoute(List<List<int[]>> route)
+        protected List<int[]> createRoute(List<List<int[]>> route)
         {
             int nRoute = route.Count;
             int[] tempArr = new int[2];
             List<int[]> result = new List<int[]>(route[0]);
+            List<int[]> treasureNodes = new List<int[]>();
+
+            for (int j = 0; j < nRoute; j++)
+            {
+
+            }
             for (int i = 0; i < nRoute - 1; i++)
             {
                 List<int[]> firstTemp = new List<int[]>(route[i]);
@@ -151,6 +177,76 @@ namespace Tubes_2.algorithms
                 result.AddRange(secondTemp);
             }
             return result;
+        }
+
+        public int[] heuristicDirection(int[] targetPoint, int[] currentPoint)
+        {
+            int[] result;
+            if (targetPoint[0] < currentPoint[0])
+            {
+                if (targetPoint[1] < currentPoint[1])
+                {
+                    result = new int[4] { 0, 1, 2, 3 };
+                }
+                else result = new int[4] { 2, 1, 0, 3 };
+            }
+            else
+            {
+                if (targetPoint[1] < currentPoint[1])
+                {
+                    result = new int[4] { 0, 3, 2, 1 };
+                }
+                else result = new int[4] { 2, 3, 0, 1 };
+            }
+
+            return result;
+        }
+        protected List<int[]> optimizedSolution(List<List<int[]>> solution)
+        {
+            List<int[]> treasureNodes = new List<int[]>();
+            List<int[]> currentSolution = solution.SelectMany(i => i).Distinct().ToList();
+
+            treasureNodes.Add(currentSolution[0]);
+            foreach (List<int[]> node in solution)
+            {
+                treasureNodes.Add(node[node.Count - 1]);
+            }
+
+            List<int[]> newSolution = new List<int[]>();
+
+            int i = 0;
+            newSolution.Add(currentSolution[0]);
+            while (i < treasureNodes.Count-1)
+            {
+                int[] direction = heuristicDirection(treasureNodes[i+1], treasureNodes[i]);
+                int[] nextNode = treasureNodes[i];
+                int[] currentNode = treasureNodes[i];
+                
+                while (!currentNode.SequenceEqual(treasureNodes[i+1]))
+                {
+                    if (isBeside(currentNode, treasureNodes[i+1]))
+                    {
+                        newSolution.Add(treasureNodes[i+1]);
+                        currentNode = treasureNodes[i+1];
+                    }
+                    else
+                    {
+                        foreach (int j in direction)
+                        {
+                            nextNode = getNextNode(currentNode, j);
+                            if (isVisited(currentSolution, nextNode))
+                            {
+                                break;
+                            }
+                        }
+                        newSolution.Add(nextNode);
+                        currentNode = nextNode;
+                    }
+                }
+                i++;
+            }
+
+            return newSolution;
         }
     }
 }

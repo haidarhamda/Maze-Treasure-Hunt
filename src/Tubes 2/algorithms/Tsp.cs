@@ -23,7 +23,7 @@ namespace Tubes_2.algorithms
 
             Tuple<List<int[]>, List<int[]>> searchResult;
 
-            if (bfsResult.Item1.Count < dfsResult.Item1.Count)
+            if (bfsResult.Item2.Count < dfsResult.Item2.Count)
             {
                 searchResult = new Tuple<List<int[]>, List<int[]>>(bfsResult.Item1, bfsResult.Item2);
             }
@@ -98,30 +98,7 @@ namespace Tubes_2.algorithms
                 searchingRoute.Add(currentTop);
             }
 
-            return new Tuple<List<int[]>, List<int[]>>(optimizedRoute(solution), optimizedRoute(searchingRoute));
-        }
-
-        public int[] heuristicDirection(int[] startPoint, int[] currentPoint)
-        {
-            int[] result;
-            if (startPoint[0] < currentPoint[0])
-            {
-                if (startPoint[1] < currentPoint[1])
-                {
-                    result = new int[4] { 0, 1, 2, 3 };
-                }
-                else result = new int[4] {2, 1, 0, 3};
-            }
-            else
-            {
-                if (startPoint[1] < currentPoint[1])
-                {
-                    result = new int[4] { 0, 3, 2, 1 };
-                }
-                else result = new int[4] { 2, 3, 0, 1 };
-            }
-
-            return result;
+            return new Tuple<List<int[]>, List<int[]>>(createRoute(solution), createRoute(searchingRoute));
         }
     }
 }

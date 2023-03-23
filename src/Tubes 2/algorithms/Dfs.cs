@@ -67,7 +67,7 @@ namespace Tubes_2.algorithms
             }
             else solved = true;
 
-            return new Tuple<List<int[]>, List<int[]>, bool>(optimizedRoute(solution), optimizedRoute(searchingRoute), solved);
+            return new Tuple<List<int[]>, List<int[]>, bool>(optimizedSolution(solution), createRoute(searchingRoute), solved);
         }
     }
 }
