@@ -199,16 +199,18 @@ namespace WinFormsApp1
                         this.Height += 120;
                         resizeOnce2 = true;
                     }
-                    var watch = System.Diagnostics.Stopwatch.StartNew();
 
+                    var watch = new System.Diagnostics.Stopwatch();
+                    watch.Start();
                     Bfs algo = new Bfs(defaultMap);
                     result = algo.bfsearch();
 
                     watch.Stop();
+
                     var task = startVisualizeAsync(result);
                     await task;
-                    double elapsed = (double)watch.ElapsedMilliseconds / 1000;
-                    output1.execTime = elapsed.ToString();
+                    TimeSpan elapsed = watch.Elapsed;
+                    output1.execTime = elapsed.TotalMilliseconds.ToString() + " ms";
                     string test = "Nodes: ";
                     //List<int[]> testing = result.Item2.Distinct().ToList();
                     //for (int i = 0; i < result.Item2.Count; i++)
@@ -218,6 +220,7 @@ namespace WinFormsApp1
                     //MessageBox.Show(test);
                     output1.nodes = countUnique(result.Item2).ToString();
                     output1.steps = (result.Item1.Count - 1).ToString();
+                    watch.Reset();
                 }
                 else if (settings1.algoChoice == 1)
                 {
@@ -227,14 +230,16 @@ namespace WinFormsApp1
                         this.Height += 120;
                         resizeOnce2 = true;
                     }
-                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    var watch = new System.Diagnostics.Stopwatch();
+                    watch.Start();
                     Dfs algo = new Dfs(defaultMap);
                     result = algo.dfsearch();
                     watch.Stop();
+
                     var task = startVisualizeAsync(result);
                     await task;
-                    double elapsed = (double)watch.ElapsedMilliseconds / 1000;
-                    output1.execTime = elapsed.ToString();
+                    TimeSpan elapsed = watch.Elapsed;
+                    output1.execTime = elapsed.TotalMilliseconds.ToString() + " ms";
                     //string test = "";
                     //for (int i = 0; i < result.Item2.Count; i++)
                     //{
@@ -243,6 +248,7 @@ namespace WinFormsApp1
                     //MessageBox.Show(test);
                     output1.nodes = countUnique(result.Item2).ToString();
                     output1.steps = (result.Item1.Count - 1).ToString();
+                    watch.Reset();
                 }
                 else if (settings1.algoChoice == 2)
                 {
@@ -252,7 +258,8 @@ namespace WinFormsApp1
                         this.Height += 120;
                         resizeOnce2 = true;
                     }
-                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    var watch = new System.Diagnostics.Stopwatch();
+                    watch.Start();
 
                     Tsp algo = new Tsp(defaultMap);
                     Tuple<List<int[]>, List<int[]>, bool> resultTSP = algo.tsproblem();
@@ -260,19 +267,16 @@ namespace WinFormsApp1
 
                     //MessageBox.Show("test");
                     watch.Stop();
+
                     var task = startVisualizeAsync(resultTSP);
                     await task;
-                    double elapsed = (double)watch.ElapsedMilliseconds / 1000;
-                    output1.execTime = elapsed.ToString();
+                    TimeSpan elapsed = watch.Elapsed;
+                    output1.execTime = elapsed.TotalMilliseconds.ToString() + " ms";
                     string test = "Nodes: ";
-                    //List<int[]> testing = result.Item2.Distinct().ToList();
-                    //for (int i = 0; i < result.Item2.Count; i++)
-                    //{
-                    //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
-                    //}
-                    //MessageBox.Show(test);
+
                     output1.nodes = countUnique(resultTSP.Item2).ToString();
                     output1.steps = (resultTSP.Item1.Count - 1).ToString();
+                    watch.Reset();
 
                 }
                 else
@@ -285,6 +289,7 @@ namespace WinFormsApp1
             {
                 MessageBox.Show(err.Message);
             }
+
             
         }
 
