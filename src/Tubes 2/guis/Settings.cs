@@ -55,6 +55,7 @@ namespace WinFormsApp1
         private void AddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 FilenameTextBox.Text = ofd.FileName;

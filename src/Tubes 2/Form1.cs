@@ -188,102 +188,104 @@ namespace WinFormsApp1
             try
             {
                 defaultMap = new Map(convertToStringArray(settings1.mapfFile));
-             
-            }catch(Exception err)
+                Tuple<List<int[]>, List<int[]>, bool> result = null;
+
+                if (settings1.algoChoice == 0)
+                {
+                    //MessageBox.Show(settings1.algoChoice.ToString());
+                    if (!resizeOnce2)
+                    {
+                        panel1.Height += 120;
+                        this.Height += 120;
+                        resizeOnce2 = true;
+                    }
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                    Bfs algo = new Bfs(defaultMap);
+                    result = algo.bfsearch();
+
+                    watch.Stop();
+                    var task = startVisualizeAsync(result);
+                    await task;
+                    double elapsed = (double)watch.ElapsedMilliseconds / 1000;
+                    output1.execTime = elapsed.ToString();
+                    string test = "Nodes: ";
+                    //List<int[]> testing = result.Item2.Distinct().ToList();
+                    //for (int i = 0; i < result.Item2.Count; i++)
+                    //{
+                    //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
+                    //}
+                    //MessageBox.Show(test);
+                    output1.nodes = countUnique(result.Item2).ToString();
+                    output1.steps = (result.Item1.Count - 1).ToString();
+                }
+                else if (settings1.algoChoice == 1)
+                {
+                    if (!resizeOnce2)
+                    {
+                        panel1.Height += 120;
+                        this.Height += 120;
+                        resizeOnce2 = true;
+                    }
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    Dfs algo = new Dfs(defaultMap);
+                    result = algo.dfsearch();
+                    watch.Stop();
+                    var task = startVisualizeAsync(result);
+                    await task;
+                    double elapsed = (double)watch.ElapsedMilliseconds / 1000;
+                    output1.execTime = elapsed.ToString();
+                    //string test = "";
+                    //for (int i = 0; i < result.Item2.Count; i++)
+                    //{
+                    //    test = test + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][1].ToString() + ")";
+                    //}
+                    //MessageBox.Show(test);
+                    output1.nodes = countUnique(result.Item2).ToString();
+                    output1.steps = (result.Item1.Count - 1).ToString();
+                }
+                else if (settings1.algoChoice == 2)
+                {
+                    if (!resizeOnce2)
+                    {
+                        panel1.Height += 120;
+                        this.Height += 120;
+                        resizeOnce2 = true;
+                    }
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+
+                    Tsp algo = new Tsp(defaultMap);
+                    Tuple<List<int[]>, List<int[]>, bool> resultTSP = algo.tsproblem();
+
+
+                    //MessageBox.Show("test");
+                    watch.Stop();
+                    var task = startVisualizeAsync(resultTSP);
+                    await task;
+                    double elapsed = (double)watch.ElapsedMilliseconds / 1000;
+                    output1.execTime = elapsed.ToString();
+                    string test = "Nodes: ";
+                    //List<int[]> testing = result.Item2.Distinct().ToList();
+                    //for (int i = 0; i < result.Item2.Count; i++)
+                    //{
+                    //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
+                    //}
+                    //MessageBox.Show(test);
+                    output1.nodes = countUnique(resultTSP.Item2).ToString();
+                    output1.steps = (resultTSP.Item1.Count - 1).ToString();
+
+                }
+                else
+                {
+                    MessageBox.Show("Pilih algoritma pencarian yang ingin digunakan terlebih dahulu!");
+                }
+
+            }
+            catch(Exception err)
             {
                 MessageBox.Show(err.Message);
             }
-            Tuple<List<int[]>, List<int[]>, bool> result = null;
-
-            if (settings1.algoChoice == 0)
-            {
-                //MessageBox.Show(settings1.algoChoice.ToString());
-                if (!resizeOnce2)
-                {
-                    panel1.Height += 120;
-                    this.Height += 120;
-                    resizeOnce2 = true;
-                }
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-
-                Bfs algo = new Bfs(defaultMap);
-                result = algo.bfsearch();
-
-                watch.Stop();
-                var task = startVisualizeAsync(result);
-                await task; 
-                double elapsed = (double)watch.ElapsedMilliseconds / 1000;
-                output1.execTime = elapsed.ToString();
-                string test = "Nodes: ";
-                //List<int[]> testing = result.Item2.Distinct().ToList();
-                //for (int i = 0; i < result.Item2.Count; i++)
-                //{
-                //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
-                //}
-                //MessageBox.Show(test);
-                output1.nodes = countUnique(result.Item2).ToString();
-                output1.steps = (result.Item1.Count - 1).ToString();
-            }
-            else if(settings1.algoChoice == 1)
-            {
-                if (!resizeOnce2)
-                {
-                    panel1.Height += 120;
-                    this.Height += 120;
-                    resizeOnce2 = true;
-                }
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-                Dfs algo = new Dfs(defaultMap);
-                result = algo.dfsearch();
-                watch.Stop();
-                var task = startVisualizeAsync(result);
-                await task;
-                double elapsed = (double)watch.ElapsedMilliseconds / 1000;
-                output1.execTime = elapsed.ToString();
-                //string test = "";
-                //for (int i = 0; i < result.Item2.Count; i++)
-                //{
-                //    test = test + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][1].ToString() + ")";
-                //}
-                //MessageBox.Show(test);
-                output1.nodes = countUnique(result.Item2).ToString();
-                output1.steps = (result.Item1.Count - 1).ToString();
-            }
-            else if(settings1.algoChoice == 2)
-            {
-                if (!resizeOnce2)
-                {
-                    panel1.Height += 120;
-                    this.Height += 120;
-                    resizeOnce2 = true;
-                }
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-
-                Tsp algo = new Tsp(defaultMap);
-                Tuple<List<int[]>, List<int[]>, bool> resultTSP = algo.tsproblem();
-
-
-                //MessageBox.Show("test");
-                watch.Stop();
-                var task = startVisualizeAsync(resultTSP);
-                await task;
-                double elapsed = (double)watch.ElapsedMilliseconds / 1000;
-                output1.execTime = elapsed.ToString();
-                string test = "Nodes: ";
-                //List<int[]> testing = result.Item2.Distinct().ToList();
-                //for (int i = 0; i < result.Item2.Count; i++)
-                //{
-                //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
-                //}
-                //MessageBox.Show(test);
-                output1.nodes = countUnique(resultTSP.Item2).ToString();
-                output1.steps = (resultTSP.Item1.Count - 1).ToString();
-
-            }
-            else
-            {
-                MessageBox.Show("Pilih algoritma pencarian yang ingin digunakan terlebih dahulu!");
-            }
+            
         }
 
         private bool isBeside(int[] current, int[] next)
