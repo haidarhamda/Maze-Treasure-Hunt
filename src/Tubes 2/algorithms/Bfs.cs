@@ -30,6 +30,7 @@ namespace Tubes_2.algorithms
                     Tuple<int[], List<int[]>> temp = nodeQueue.Dequeue();
                     int[] currentNode = temp.Item1;
                     Console.Write(currentNode[0].ToString() + " " + currentNode[1].ToString() + " ");
+                    
 
                     path = temp.Item2;
                     foreach (var node in path)
@@ -62,6 +63,10 @@ namespace Tubes_2.algorithms
                                 visited.Add(nextNode);
                             }
                         }
+                    }
+                    if(currentTreasure == totalTreasure)
+                    {
+                        break;
                     }
                 }
                 searchRoute.AddRange(visited);
