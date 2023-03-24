@@ -273,18 +273,12 @@ namespace WinFormsApp1
         {
             // Inisialisasi flag kunjungan
             bool repeatedNode;
+            List<int[]> temp = new List<int[]>();
 
             // Show search route
             for (int i = 0; i < result.Item2.Count; i++)
             {
-                repeatedNode = false;
                 Color oldColor = dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor;
-
-                // Flag jika node sudah pernah dikunjungi
-                if (dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.White)
-                {
-                    repeatedNode = true;
-                }
 
                 // Menunjukkan current node
                 dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Blue;
@@ -293,7 +287,7 @@ namespace WinFormsApp1
                 await Task.Delay((int)(settings1.delaySettings * 1000));
 
                 // Jika node sudah pernah dikunjungi ubah warna menjadi lebih gelap
-                if (repeatedNode)
+                if (i > 0 && util.countDistinct(temp, result.Item2[i]))
                 {
                     Color newColor = ControlPaint.Dark(oldColor, 0.1f);
                     dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = newColor;
@@ -303,22 +297,29 @@ namespace WinFormsApp1
                     dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
                 }
 
+                temp.Add(result.Item2[i]);
+
             }
 
             // Show solution route
             string routeDir = "";
+            temp.Clear();
             for (int i = 0; i < result.Item1.Count; i++)
             {
+                Color oldColor = dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor;
+
                 // Jika node sudah pernah dikunjungi ubah warna menjadi lebih gelap
-                if (dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor == Color.IndianRed)
+                if (i > 0 && util.countDistinct(temp, result.Item1[i]))
                 {
-                    Color newColor = ControlPaint.Dark(Color.IndianRed, 0.2f);
+                    Color newColor = ControlPaint.Dark(oldColor, 0.2f);
                     dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = newColor;
                 }
                 else
                 {  
                     dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
                 }
+
+                temp.Add(result.Item1[i]);
                 
                 
                 // Menentukan arah gerak solusi
