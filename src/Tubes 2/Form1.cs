@@ -292,7 +292,7 @@ namespace WinFormsApp1
                 // Delay untuk animasi
                 await Task.Delay((int)(settings1.delaySettings * 1000));
 
-                // Jika node sudah pernah dikunjungi ubah menjadi warna Orange, jika tidak ubah menjadi Yellow
+                // Jika node sudah pernah dikunjungi ubah warna menjadi lebih gelap
                 if (repeatedNode)
                 {
                     Color newColor = ControlPaint.Dark(oldColor, 0.1f);
@@ -309,9 +309,8 @@ namespace WinFormsApp1
             string routeDir = "";
             for (int i = 0; i < result.Item1.Count; i++)
             {
-                // Ubah warna cell
-                //MessageBox.Show(dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor.ToString());
-                if(dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor == Color.IndianRed)
+                // Jika node sudah pernah dikunjungi ubah warna menjadi lebih gelap
+                if (dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor == Color.IndianRed)
                 {
                     Color newColor = ControlPaint.Dark(Color.IndianRed, 0.2f);
                     dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = newColor;
