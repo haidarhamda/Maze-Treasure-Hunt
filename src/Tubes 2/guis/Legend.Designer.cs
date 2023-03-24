@@ -32,8 +32,6 @@
             this.IndianRedBox = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.BlueBox = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.OrangeBox = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.YellowBox = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -62,7 +60,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Schoolbook", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(584, 20);
+            this.label3.Location = new System.Drawing.Point(432, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 19);
             this.label3.TabIndex = 13;
@@ -72,31 +70,11 @@
             // 
             this.BlueBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.BlueBox.Enabled = false;
-            this.BlueBox.Location = new System.Drawing.Point(536, 15);
+            this.BlueBox.Location = new System.Drawing.Point(384, 15);
             this.BlueBox.Name = "BlueBox";
             this.BlueBox.Size = new System.Drawing.Size(29, 29);
             this.BlueBox.TabIndex = 12;
             this.BlueBox.UseVisualStyleBackColor = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Schoolbook", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(281, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(186, 19);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Visited more than once";
-            // 
-            // OrangeBox
-            // 
-            this.OrangeBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.OrangeBox.Enabled = false;
-            this.OrangeBox.Location = new System.Drawing.Point(233, 15);
-            this.OrangeBox.Name = "OrangeBox";
-            this.OrangeBox.Size = new System.Drawing.Size(29, 29);
-            this.OrangeBox.TabIndex = 10;
-            this.OrangeBox.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -118,7 +96,7 @@
             this.YellowBox.TabIndex = 8;
             this.YellowBox.UseVisualStyleBackColor = false;
             // 
-            // UserControl1
+            // Legend
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -126,11 +104,9 @@
             this.Controls.Add(this.IndianRedBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.BlueBox);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.OrangeBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.YellowBox);
-            this.Name = "UserControl1";
+            this.Name = "Legend";
             this.Size = new System.Drawing.Size(869, 62);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
@@ -144,8 +120,6 @@
         private Button IndianRedBox;
         private Label label3;
         private Button BlueBox;
-        private Label label2;
-        private Button OrangeBox;
         private Label label1;
         private Button YellowBox;
     }

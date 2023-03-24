@@ -20,7 +20,6 @@ namespace Tubes_2
         private void UserControl1_Load(object sender, EventArgs e)
         {
             YellowBox.BackColor = Color.Yellow;
-            OrangeBox.BackColor = Color.Orange;
             BlueBox.BackColor = Color.Blue;
             IndianRedBox.BackColor = Color.IndianRed;
         }

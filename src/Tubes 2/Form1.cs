@@ -187,7 +187,7 @@ namespace WinFormsApp1
                 Tuple<List<int[]>, List<int[]>, bool> result = null;
                 
                 // Pencarian solusi sesuai dengan algoritma yang dipilih
-                if(settings1.algoChoice == 0 || settings1.algoChoice == 1 || settings1.algoChoice >= 3)
+                if(settings1.algoChoice == 0 || settings1.algoChoice == 1 || settings1.algoChoice == 3 || settings1.algoChoice == 4)
                 {
                     // Resize app
                     resize(ref resizeOnce2, 170);
@@ -205,10 +205,15 @@ namespace WinFormsApp1
                     {
                         Dfs algo = new Dfs(defaultMap);
                         result = algo.dfsearch();
-                    }else if(settings1.algoChoice >= 3)
+                    }else if(settings1.algoChoice == 3)
                     {
                         Tsp algo = new Tsp(defaultMap);
-                        result = algo.tsproblem();
+                        result = algo.tspWithBfs();
+                    }
+                    else
+                    {
+                        Tsp algo = new Tsp(defaultMap);
+                        result = algo.tspWithDfs();
                     }
 
                     // Stop counter
@@ -273,9 +278,10 @@ namespace WinFormsApp1
             for (int i = 0; i < result.Item2.Count; i++)
             {
                 repeatedNode = false;
+                Color oldColor = dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor;
 
                 // Flag jika node sudah pernah dikunjungi
-                if (dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Yellow || dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Orange)
+                if (dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.White)
                 {
                     repeatedNode = true;
                 }
@@ -289,7 +295,8 @@ namespace WinFormsApp1
                 // Jika node sudah pernah dikunjungi ubah menjadi warna Orange, jika tidak ubah menjadi Yellow
                 if (repeatedNode)
                 {
-                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Orange;
+                    Color newColor = ControlPaint.Dark(oldColor, 0.1f);
+                    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = newColor;
                 }
                 else
                 {
@@ -303,7 +310,17 @@ namespace WinFormsApp1
             for (int i = 0; i < result.Item1.Count; i++)
             {
                 // Ubah warna cell
-                dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
+                //MessageBox.Show(dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor.ToString());
+                if(dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor == Color.IndianRed)
+                {
+                    Color newColor = ControlPaint.Dark(Color.IndianRed, 0.2f);
+                    dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = newColor;
+                }
+                else
+                {  
+                    dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
+                }
+                
                 
                 // Menentukan arah gerak solusi
                 if(i != (result.Item1.Count - 1))
