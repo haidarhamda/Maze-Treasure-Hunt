@@ -45,7 +45,7 @@ namespace Tubes_2.algorithms
                     treasureGet++;
                 }
 
-                for (int i = 3; i > -1; i--)
+                for (int i = 0; i < 4; i++)
                 {
                     int[] nextNode = getNextNode(currentNode, i);
                     if (maze[nextNode[0], nextNode[1]] != "X" && !isVisited(visited, nextNode))
@@ -67,7 +67,7 @@ namespace Tubes_2.algorithms
             }
             else solved = true;
 
-            return new Tuple<List<int[]>, List<int[]>, bool>(optimizedSolution(solution), createRoute(searchingRoute), solved);
+            return new Tuple<List<int[]>, List<int[]>, bool>(createRoute(solution), createRoute(searchingRoute), solved);
         }
     }
 }
