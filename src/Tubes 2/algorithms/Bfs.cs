@@ -13,25 +13,25 @@ namespace Tubes_2.algorithms
         public Tuple<List<int[]>, List<int[]>, bool> bfsearch()
         {
             int[] startingPoint = this.map.getStartingPoint();
-            Queue<Tuple<int[], List<int[]>>> q = new Queue<Tuple<int[], List<int[]>>>();
+            Queue<Tuple<int[], List<int[]>>> nodeQueue = new Queue<Tuple<int[], List<int[]>>>();
             List<int[]> visited = new List<int[]> { startingPoint };
             int totalTreasure = this.map.getTreasureAmount();
             int currentTreasure = 0;
-            q.Enqueue(new Tuple<int[], List<int[]>>(startingPoint, new List<int[]>()));
+            nodeQueue.Enqueue(new Tuple<int[], List<int[]>>(startingPoint, new List<int[]>()));
             int[] nextNode = new int[2];
             List<int[]> path = new List<int[]>();
             bool solved = true;
-            List<int[]> visited2 = new List<int[]>();
+            List<int[]> searchRoute = new List<int[]>();
             while (currentTreasure < totalTreasure)
             {
 
-                while (q.Count > 0)
+                while (nodeQueue.Count > 0)
                 {
-                    Tuple<int[], List<int[]>> t = q.Dequeue();
-                    int[] currentNode = t.Item1;
+                    Tuple<int[], List<int[]>> temp = nodeQueue.Dequeue();
+                    int[] currentNode = temp.Item1;
                     Console.Write(currentNode[0].ToString() + " " + currentNode[1].ToString() + " ");
 
-                    path = t.Item2;
+                    path = temp.Item2;
                     foreach (var node in path)
                     {
                         Console.Write("<" + node[0].ToString() + "," + node[1].ToString() + "> ");
@@ -53,31 +53,31 @@ namespace Tubes_2.algorithms
                             nextNode = getNextNode(currentNode, i);
                             if (!isVisited(visited, nextNode) && map.getMap()[nextNode[0], nextNode[1]] != "X")
                             {
-                                List<int[]> temp = new List<int[]>();
+                                List<int[]> tmp = new List<int[]>();
                                 //path.Add(currentNode);
-                                temp.AddRange(path);
-                                temp.Add(currentNode);
+                                tmp.AddRange(path);
+                                tmp.Add(currentNode);
                                 //temp.Add(currentNode);
-                                q.Enqueue(new Tuple<int[], List<int[]>>(nextNode, temp));
+                                nodeQueue.Enqueue(new Tuple<int[], List<int[]>>(nextNode, tmp));
                                 visited.Add(nextNode);
                             }
                         }
                     }
                 }
-                visited2.AddRange(visited);
-                q.Clear();
+                searchRoute.AddRange(visited);
+                nodeQueue.Clear();
                 visited.Clear();
                 if (currentTreasure < totalTreasure)
                 {
                     path.Remove(path.Last());
                 }
-                q.Enqueue(new Tuple<int[], List<int[]>>(startingPoint, path));
+                nodeQueue.Enqueue(new Tuple<int[], List<int[]>>(startingPoint, path));
             }
             if (currentTreasure != totalTreasure)
             {
                 solved = false;
             }
-            return new Tuple<List<int[]>, List<int[]>, bool>(path, visited2, solved);
+            return new Tuple<List<int[]>, List<int[]>, bool>(path, searchRoute, solved);
         }
     }
 }

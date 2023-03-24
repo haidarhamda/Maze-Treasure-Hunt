@@ -12,7 +12,17 @@ namespace Tubes_2.algorithms
     {
         public Tsp(Map map) : base(map) { }
 
-        public Tuple<List<int[]>, List<int[]>, bool> tsproblem()
+        public Tuple<List<int[]>, List<int[]>, bool> tspWithBfs()
+        {
+            return tsproblem("Bfs");
+        }
+
+        public Tuple<List<int[]>, List<int[]>, bool> tspWithDfs()
+        {
+            return tsproblem("Dfs");
+        }
+
+        public Tuple<List<int[]>, List<int[]>, bool> tsproblem(string mode)
         {
             Dfs dfs = new Dfs(this.map);
             Tuple<List<int[]>, List<int[]>, bool> dfsResult = dfs.dfsearch();
@@ -23,7 +33,7 @@ namespace Tubes_2.algorithms
 
             Tuple<List<int[]>, List<int[]>> searchResult;
 
-            if (bfsResult.Item2.Count < dfsResult.Item2.Count)
+            if (string.Compare(mode, "Bfs") == 0)
             {
                 searchResult = new Tuple<List<int[]>, List<int[]>>(bfsResult.Item1, bfsResult.Item2);
             }
@@ -32,7 +42,9 @@ namespace Tubes_2.algorithms
                 searchResult = new Tuple<List<int[]>, List<int[]>>(dfsResult.Item1, dfsResult.Item2);
             }
 
-            Tuple<List<int[]>, List<int[]>> routeBack = getRouteBack(searchResult.Item1[searchResult.Item1.Count-1]);
+            List<int[]> visited = searchResult.Item2.Distinct().ToList();
+
+            Tuple<List<int[]>, List<int[]>> routeBack = getRouteBack(searchResult.Item1[searchResult.Item1.Count-1],visited);
             List<int[]> tspSolution = new List<int[]>(searchResult.Item1);
             List<int[]> tspSearching = new List<int[]>(searchResult.Item2);
             routeBack.Item1.RemoveAt(0);
@@ -43,7 +55,7 @@ namespace Tubes_2.algorithms
             return new Tuple<List<int[]>, List<int[]>, bool>(tspSolution, tspSearching, false);
         }
 
-        public Tuple<List<int[]>, List<int[]>> getRouteBack(int[] current)
+        public Tuple<List<int[]>, List<int[]>> getRouteBack(int[] current, List<int[]> visited)
         {
             String[,] maze = this.map.getMap();
             int[] start = this.map.getStartingPoint();
@@ -52,7 +64,6 @@ namespace Tubes_2.algorithms
             Stack<List<int[]>> nodeStack = new Stack<List<int[]>>();
             List<List<int[]>> solution = new List<List<int[]>>();
             List<List<int[]>> searchingRoute = new List<List<int[]>>();
-            List<int[]> visited = new List<int[]>();
 
             bool back = false;
             List<int[]> temp = new List<int[]>();
@@ -81,15 +92,34 @@ namespace Tubes_2.algorithms
                     back = true;
                 }
 
+                Queue<int[]> tempUnvisited = new Queue<int[]>();
+                Queue<int[]> tempVisited = new Queue<int[]>();
                 foreach (int i in direction)
                 {
                     int[] nextNode = getNextNode(currentNode, i);
-                    if (maze[nextNode[0], nextNode[1]] != "X" && !isVisited(visited, nextNode))
+                    if (maze[nextNode[0], nextNode[1]] != "X")
                     {
-                        temp.Add(nextNode);
-                        nodeStack.Push(new List<int[]>(temp));
-                        temp.RemoveAt(temp.Count - 1);
+                        if (!isVisited(visited, nextNode))
+                        {
+                            tempUnvisited.Enqueue(nextNode);
+                        }
+                        else
+                        {
+                            tempVisited.Enqueue(nextNode);
+                        }
                     }
+                }
+                foreach (int[] nextVisited in tempVisited)
+                {
+                    temp.Add(nextVisited);
+                    nodeStack.Push(new List<int[]>(temp));
+                    temp.RemoveAt(temp.Count - 1);
+                }
+                foreach (int[] nextUnvisited in tempUnvisited)
+                {
+                    temp.Add(nextUnvisited);
+                    nodeStack.Push(new List<int[]>(temp));
+                    temp.RemoveAt(temp.Count - 1);
                 }
                 temp.Clear();
             }

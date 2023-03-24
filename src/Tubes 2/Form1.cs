@@ -25,7 +25,7 @@ namespace WinFormsApp1
             List<int[]> result = new List<int[]>();
             foreach (int[] node in nodes)
             {
-                if (!util.isVisited(result, node))
+                if (!util.countDistinct(result, node))
                 {
                     result.Add(node);
                 }
