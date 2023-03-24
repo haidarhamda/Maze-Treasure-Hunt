@@ -39,3 +39,4 @@ C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\bin\Debug\net6.0-w
 C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\bin\Debug\net6.0-windows\Tubes 2.pdb
 C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes 2.genruntimeconfig.cache
 C:\Users\User\Documents\stima\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\ref\Tubes 2.dll
+D:\Kuliah\SMT 4\Stima\Tubes\Tubes 2\Tubes2_DuelisSejati\src\Tubes 2\obj\Debug\net6.0-windows\Tubes_2.Legend.resources

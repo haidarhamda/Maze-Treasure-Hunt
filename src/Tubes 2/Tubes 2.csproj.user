@@ -10,5 +10,8 @@
     <Compile Update="guis\Settings.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="guis\Legend.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -173,14 +173,13 @@ namespace WinFormsApp1
             {
                 defaultMap = new Map(convertToStringArray(settings1.mapfFile));
                 Tuple<List<int[]>, List<int[]>, bool> result = null;
-                MessageBox.Show(settings1.algoChoice.ToString());
                 if (settings1.algoChoice == 0)
                 {
                     //MessageBox.Show(settings1.algoChoice.ToString());
                     if (!resizeOnce2)
                     {
-                        panel1.Height += 120;
-                        this.Height += 120;
+                        panel1.Height += 170;
+                        this.Height += 170;
                         resizeOnce2 = true;
                     }
 
@@ -210,8 +209,8 @@ namespace WinFormsApp1
                 {
                     if (!resizeOnce2)
                     {
-                        panel1.Height += 120;
-                        this.Height += 120;
+                        panel1.Height += 170;
+                        this.Height += 170;
                         resizeOnce2 = true;
                     }
                     var watch = new System.Diagnostics.Stopwatch();
@@ -238,8 +237,8 @@ namespace WinFormsApp1
                 {
                     if (!resizeOnce2)
                     {
-                        panel1.Height += 120;
-                        this.Height += 120;
+                        panel1.Height += 220;
+                        this.Height += 220;
                         resizeOnce2 = true;
                     }
                     var watch = new System.Diagnostics.Stopwatch();
@@ -414,6 +413,11 @@ namespace WinFormsApp1
                 }
             }
             return _map;
+        }
+
+        private void settings1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
