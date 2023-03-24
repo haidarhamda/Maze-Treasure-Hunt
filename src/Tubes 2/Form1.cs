@@ -33,26 +33,10 @@ namespace WinFormsApp1
             return result.Count;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void settings1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
 
         private void start_map_visual(object sender, EventArgs e)
         {
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent;
-            //dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Transparent;
             const Int32 BufferSize = 128;
             using (var fileStream = File.OpenRead(settings1.mapfFile))
             {
@@ -349,6 +333,7 @@ namespace WinFormsApp1
                 //{
                 //    dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
                 //}
+
                 await Task.Delay((int)(settings1.delaySettings * 1000));
 
                 if (repeatedNode)
@@ -413,8 +398,7 @@ namespace WinFormsApp1
             }
 
             output1.route = routeDir;
-            //output1.nodes = result.Item2.Distinct().ToList().Count.ToString();
-            //output1.steps = result.Item1.Count.ToString();
+
         }
 
         private string[,] convertToStringArray(string filename)

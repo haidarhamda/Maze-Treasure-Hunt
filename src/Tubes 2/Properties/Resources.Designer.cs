@@ -73,6 +73,16 @@ namespace Tubes_2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _853961688449810462 {
+            get {
+                object obj = ResourceManager.GetObject("853961688449810462", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _Downloader_la__64185ff38cfdd {
             get {
                 object obj = ResourceManager.GetObject("[Downloader.la]-64185ff38cfdd", resourceCulture);
