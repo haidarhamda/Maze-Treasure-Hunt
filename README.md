@@ -15,6 +15,14 @@
 1. Buka folder `bin`
 2. Jalankan file `Tubes 2.exe`
 
+## Cara Mengcompile program
+1. Buka visual studio
+2. Pilih `Open a project or solution`
+3. Pilih `Tubes2_DuelisSejati` > `src` > `Tubes 2.sln`
+4. Tekan `Ctrl + B` atau tanda panah hijau di window atas
+5. Program akan dibuild dan akan langsung berjalan
+6. Hasil program dapat dilihat juga di dalam folder bin (cari sampai ketemu .exe)
+
 ## Cara Menggunakan
 1. Click `Add File` dan pilih file txt yang ingin dimasukan ke program
 2. Click `Visualize` untuk memviusalisasikan labirin pada file txt
@@ -29,5 +37,4 @@
 | :---         |     :---:      |          ---: |
 | Christian Albert Hasiholan  | 13521078     |[ChrisAlberth](https://github.com/ChrisAlberth) |
 | Haidar Hamda  | 13521105     |[haidarhamda](https://github.com/haidarhamda) |
-| Edia Zaki Naufal Ilman  | 13521141     |[Ezaaan
-](https://github.com/Ezaaan) |
+| Edia Zaki Naufal Ilman  | 13521141     |[Ezaaan](https://github.com/Ezaaan) |
