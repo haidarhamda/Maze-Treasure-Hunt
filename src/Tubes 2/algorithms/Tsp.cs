@@ -24,25 +24,22 @@ namespace Tubes_2.algorithms
 
         public Tuple<List<int[]>, List<int[]>, bool> tsproblem(string mode)
         {
-            Dfs dfs = new Dfs(this.map);
-            Tuple<List<int[]>, List<int[]>, bool> dfsResult = dfs.dfsearch();
-
-            Bfs bfs = new Bfs(this.map);
-            Tuple<List<int[]>, List<int[]>, bool> bfsResult = bfs.bfsearch();
-
-
             Tuple<List<int[]>, List<int[]>> searchResult;
 
             if (string.Compare(mode, "Bfs") == 0)
             {
+                Bfs bfs = new Bfs(this.map);
+                Tuple<List<int[]>, List<int[]>, bool> bfsResult = bfs.bfsearch();
                 searchResult = new Tuple<List<int[]>, List<int[]>>(bfsResult.Item1, bfsResult.Item2);
             }
             else
             {
+                Dfs dfs = new Dfs(this.map);
+                Tuple<List<int[]>, List<int[]>, bool> dfsResult = dfs.dfsearch();
                 searchResult = new Tuple<List<int[]>, List<int[]>>(dfsResult.Item1, dfsResult.Item2);
             }
 
-            List<int[]> visited = searchResult.Item2.Distinct().ToList();
+            List<int[]> visited = searchResult.Item2.ToList();
 
             Tuple<List<int[]>, List<int[]>> routeBack = getRouteBack(searchResult.Item1[searchResult.Item1.Count-1],visited);
             List<int[]> tspSolution = new List<int[]>(searchResult.Item1);
@@ -68,6 +65,7 @@ namespace Tubes_2.algorithms
             bool back = false;
             List<int[]> temp = new List<int[]>();
             List<int[]> currentTop = new List<int[]>();
+            List<int[]> visitedNow = new List<int[]>();
             int[] currentNode;
 
             nodeStack.Push(new List<int[]> { current });
@@ -79,25 +77,26 @@ namespace Tubes_2.algorithms
                 currentNode = currentTop[currentTop.Count - 1];
                 temp = currentTop.ToList();
 
-                visited.Add(currentNode);
+                if (maze[currentNode[0], currentNode[1]] == "K")
+                {
+                    solution.Add(currentTop);
+                    back = true;
+                }
+                visitedNow.Add(currentNode);
 
                 if (!isBranched(maze, visited, currentNode))
                 {
                     searchingRoute.Add(currentTop);
                 }
 
-                if (maze[currentNode[0], currentNode[1]] == "K")
-                {
-                    solution.Add(currentTop);
-                    back = true;
-                }
+                
 
                 Queue<int[]> tempUnvisited = new Queue<int[]>();
                 Queue<int[]> tempVisited = new Queue<int[]>();
                 foreach (int i in direction)
                 {
                     int[] nextNode = getNextNode(currentNode, i);
-                    if (maze[nextNode[0], nextNode[1]] != "X")
+                    if (maze[nextNode[0], nextNode[1]] != "X" && !isVisited(visitedNow, nextNode))
                     {
                         if (!isVisited(visited, nextNode))
                         {

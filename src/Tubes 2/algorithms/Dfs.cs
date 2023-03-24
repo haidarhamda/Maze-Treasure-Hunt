@@ -31,7 +31,11 @@ namespace Tubes_2.algorithms
                 currentTop = nodeStack.Pop();
                 currentNode = currentTop[currentTop.Count - 1];
                 temp = currentTop.ToList();
-
+                if (maze[currentNode[0], currentNode[1]] == "T" && !isVisited(visited, currentNode))
+                {
+                    solution.Add(currentTop);
+                    treasureGet++;
+                }
                 visited.Add(currentNode);
 
                 if (!isBranched(maze, visited, currentNode))
@@ -39,11 +43,7 @@ namespace Tubes_2.algorithms
                     searchingRoute.Add(currentTop);
                 }
 
-                if (maze[currentNode[0], currentNode[1]] == "T")
-                {
-                    solution.Add(currentTop);
-                    treasureGet++;
-                }
+                
 
                 for (int i = 0; i < 4; i++)
                 {
