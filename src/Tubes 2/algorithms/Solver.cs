@@ -16,7 +16,7 @@ namespace Tubes_2.algorithms
     {
         public static bool visited;
 
-        public static bool isVisited(List<int[]> visited, int[] node)
+        public static bool countDistinct(List<int[]> visited, int[] node)
         {
             foreach (var Node in visited)
             {
