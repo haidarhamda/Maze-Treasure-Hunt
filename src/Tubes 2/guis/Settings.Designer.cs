@@ -46,7 +46,7 @@
             // 
             this.FileLabel.AutoSize = true;
             this.FileLabel.Font = new System.Drawing.Font("Century Schoolbook", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.FileLabel.Location = new System.Drawing.Point(14, 36);
+            this.FileLabel.Location = new System.Drawing.Point(14, 11);
             this.FileLabel.Name = "FileLabel";
             this.FileLabel.Size = new System.Drawing.Size(51, 21);
             this.FileLabel.TabIndex = 0;
@@ -57,7 +57,7 @@
             this.FilenameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FilenameTextBox.Enabled = false;
             this.FilenameTextBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FilenameTextBox.Location = new System.Drawing.Point(14, 60);
+            this.FilenameTextBox.Location = new System.Drawing.Point(14, 35);
             this.FilenameTextBox.Name = "FilenameTextBox";
             this.FilenameTextBox.ReadOnly = true;
             this.FilenameTextBox.Size = new System.Drawing.Size(379, 23);
@@ -69,7 +69,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Century Schoolbook", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(399, 58);
+            this.button1.Location = new System.Drawing.Point(399, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 29);
             this.button1.TabIndex = 2;
@@ -81,7 +81,7 @@
             // 
             this.AlgorithmLabel.AutoSize = true;
             this.AlgorithmLabel.Font = new System.Drawing.Font("Century Schoolbook", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.AlgorithmLabel.Location = new System.Drawing.Point(600, 36);
+            this.AlgorithmLabel.Location = new System.Drawing.Point(600, 11);
             this.AlgorithmLabel.Name = "AlgorithmLabel";
             this.AlgorithmLabel.Size = new System.Drawing.Size(105, 21);
             this.AlgorithmLabel.TabIndex = 3;
@@ -91,7 +91,7 @@
             // 
             this.BFSButton.AutoSize = true;
             this.BFSButton.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.BFSButton.Location = new System.Drawing.Point(531, 64);
+            this.BFSButton.Location = new System.Drawing.Point(531, 39);
             this.BFSButton.Name = "BFSButton";
             this.BFSButton.Size = new System.Drawing.Size(62, 23);
             this.BFSButton.TabIndex = 4;
@@ -104,7 +104,7 @@
             // 
             this.DFSButton.AutoSize = true;
             this.DFSButton.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.DFSButton.Location = new System.Drawing.Point(619, 64);
+            this.DFSButton.Location = new System.Drawing.Point(619, 39);
             this.DFSButton.Name = "DFSButton";
             this.DFSButton.Size = new System.Drawing.Size(64, 23);
             this.DFSButton.TabIndex = 5;
@@ -118,7 +118,7 @@
             this.button2.BackColor = System.Drawing.Color.DodgerBlue;
             this.button2.Font = new System.Drawing.Font("Century Schoolbook", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(786, 54);
+            this.button2.Location = new System.Drawing.Point(786, 29);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 36);
             this.button2.TabIndex = 6;
@@ -129,7 +129,7 @@
             // DelaySlider
             // 
             this.DelaySlider.LargeChange = 10;
-            this.DelaySlider.Location = new System.Drawing.Point(83, 123);
+            this.DelaySlider.Location = new System.Drawing.Point(83, 98);
             this.DelaySlider.Maximum = 100;
             this.DelaySlider.Minimum = 1;
             this.DelaySlider.Name = "DelaySlider";
@@ -143,7 +143,7 @@
             this.SliderTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SliderTextBox.Enabled = false;
             this.SliderTextBox.Font = new System.Drawing.Font("Century Schoolbook", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.SliderTextBox.Location = new System.Drawing.Point(700, 123);
+            this.SliderTextBox.Location = new System.Drawing.Point(700, 98);
             this.SliderTextBox.Name = "SliderTextBox";
             this.SliderTextBox.Size = new System.Drawing.Size(72, 26);
             this.SliderTextBox.TabIndex = 8;
@@ -153,7 +153,7 @@
             // 
             this.TSPButton.AutoSize = true;
             this.TSPButton.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.TSPButton.Location = new System.Drawing.Point(810, 126);
+            this.TSPButton.Location = new System.Drawing.Point(810, 101);
             this.TSPButton.Name = "TSPButton";
             this.TSPButton.Size = new System.Drawing.Size(62, 23);
             this.TSPButton.TabIndex = 9;
@@ -167,7 +167,7 @@
             // 
             this.TSPCheckBox.AutoSize = true;
             this.TSPCheckBox.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.TSPCheckBox.Location = new System.Drawing.Point(700, 67);
+            this.TSPCheckBox.Location = new System.Drawing.Point(700, 42);
             this.TSPCheckBox.Name = "TSPCheckBox";
             this.TSPCheckBox.Size = new System.Drawing.Size(63, 23);
             this.TSPCheckBox.TabIndex = 10;
@@ -192,7 +192,7 @@
             this.Controls.Add(this.FilenameTextBox);
             this.Controls.Add(this.FileLabel);
             this.Name = "Settings";
-            this.Size = new System.Drawing.Size(935, 203);
+            this.Size = new System.Drawing.Size(935, 153);
             this.Load += new System.EventHandler(this.Settings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DelaySlider)).EndInit();
             this.ResumeLayout(false);

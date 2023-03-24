@@ -33,8 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.searchButton = new System.Windows.Forms.Button();
             this.output1 = new WinFormsApp1.Output();
+            this.legend1 = new Tubes_2.Legend();
+            this.searchButton = new System.Windows.Forms.Button();
             this.settings1 = new WinFormsApp1.Settings();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -97,20 +98,41 @@
             this.flowLayoutPanel1.Controls.Add(this.settings1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(27, 65);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(929, 698);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(929, 668);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.searchButton);
             this.panel1.Controls.Add(this.output1);
+            this.panel1.Controls.Add(this.legend1);
+            this.panel1.Controls.Add(this.searchButton);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 474);
+            this.panel1.Size = new System.Drawing.Size(901, 476);
             this.panel1.TabIndex = 9;
+            // 
+            // output1
+            // 
+            this.output1.BackColor = System.Drawing.Color.Transparent;
+            this.output1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.output1.execTime = null;
+            this.output1.Location = new System.Drawing.Point(7, 566);
+            this.output1.Name = "output1";
+            this.output1.nodes = null;
+            this.output1.route = null;
+            this.output1.Size = new System.Drawing.Size(894, 103);
+            this.output1.steps = null;
+            this.output1.TabIndex = 1;
+            // 
+            // legend1
+            // 
+            this.legend1.Location = new System.Drawing.Point(0, 511);
+            this.legend1.Name = "legend1";
+            this.legend1.Size = new System.Drawing.Size(898, 78);
+            this.legend1.TabIndex = 3;
             // 
             // searchButton
             // 
@@ -127,32 +149,20 @@
             this.searchButton.UseVisualStyleBackColor = false;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // output1
-            // 
-            this.output1.BackColor = System.Drawing.Color.Transparent;
-            this.output1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.output1.execTime = null;
-            this.output1.Location = new System.Drawing.Point(4, 513);
-            this.output1.Name = "output1";
-            this.output1.nodes = null;
-            this.output1.route = null;
-            this.output1.Size = new System.Drawing.Size(894, 103);
-            this.output1.steps = null;
-            this.output1.TabIndex = 1;
-            // 
             // settings1
             // 
             this.settings1.algoChoice = -1;
             this.settings1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.settings1.BackColor = System.Drawing.Color.Transparent;
             this.settings1.delaySettings = 0.01D;
-            this.settings1.Location = new System.Drawing.Point(3, 483);
+            this.settings1.Location = new System.Drawing.Point(3, 485);
             this.settings1.mapfFile = null;
             this.settings1.Name = "settings1";
             this.settings1.safeSettings = false;
             this.settings1.Size = new System.Drawing.Size(887, 171);
             this.settings1.TabIndex = 1;
             this.settings1.SettingsChanged += new System.EventHandler(this.start_map_visual);
+            this.settings1.Load += new System.EventHandler(this.settings1_Load);
             // 
             // pictureBox1
             // 
@@ -179,7 +189,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(968, 748);
+            this.ClientSize = new System.Drawing.Size(968, 718);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
@@ -206,5 +216,7 @@
         private Button searchButton;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private Tubes_2.Legend userControl11;
+        private Tubes_2.Legend legend1;
     }
 }
