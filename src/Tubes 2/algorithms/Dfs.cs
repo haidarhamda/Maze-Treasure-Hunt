@@ -8,7 +8,7 @@ namespace Tubes_2.algorithms
     public partial class Dfs : Solver
     {
         public Dfs(Map map) : base(map) { }
-        public Tuple<List<int[]>, List<int[]>, bool> dfsearch()
+        public Tuple<List<int[]>, List<int[]>, List<int[]>> dfsearch()
         {
             String[,] maze = this.map.getMap();
             int[] startingPoint = this.map.getStartingPoint();
@@ -67,7 +67,7 @@ namespace Tubes_2.algorithms
             }
             else solved = true;
 
-            return new Tuple<List<int[]>, List<int[]>, bool>(createRoute(solution), createRoute(searchingRoute), solved);
+            return new Tuple<List<int[]>, List<int[]>, List<int[]>>(createRoute(solution), createRoute(searchingRoute), visited);
         }
     }
 }

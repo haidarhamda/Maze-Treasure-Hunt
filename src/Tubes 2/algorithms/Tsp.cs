@@ -12,30 +12,30 @@ namespace Tubes_2.algorithms
     {
         public Tsp(Map map) : base(map) { }
 
-        public Tuple<List<int[]>, List<int[]>, bool> tspWithBfs()
+        public Tuple<List<int[]>, List<int[]>, List<int[]>> tspWithBfs()
         {
             return tsproblem("Bfs");
         }
 
-        public Tuple<List<int[]>, List<int[]>, bool> tspWithDfs()
+        public Tuple<List<int[]>, List<int[]>, List<int[]>> tspWithDfs()
         {
             return tsproblem("Dfs");
         }
 
-        public Tuple<List<int[]>, List<int[]>, bool> tsproblem(string mode)
+        public Tuple<List<int[]>, List<int[]>, List<int[]>> tsproblem(string mode)
         {
             Tuple<List<int[]>, List<int[]>> searchResult;
 
             if (string.Compare(mode, "Bfs") == 0)
             {
                 Bfs bfs = new Bfs(this.map);
-                Tuple<List<int[]>, List<int[]>, bool> bfsResult = bfs.bfsearch();
+                Tuple<List<int[]>, List<int[]>, List<int[]>> bfsResult = bfs.bfsearch();
                 searchResult = new Tuple<List<int[]>, List<int[]>>(bfsResult.Item1, bfsResult.Item2);
             }
             else
             {
                 Dfs dfs = new Dfs(this.map);
-                Tuple<List<int[]>, List<int[]>, bool> dfsResult = dfs.dfsearch();
+                Tuple<List<int[]>, List<int[]>, List<int[]>> dfsResult = dfs.dfsearch();
                 searchResult = new Tuple<List<int[]>, List<int[]>>(dfsResult.Item1, dfsResult.Item2);
             }
 
@@ -49,7 +49,7 @@ namespace Tubes_2.algorithms
             tspSolution.AddRange(routeBack.Item1);
             tspSearching.AddRange(routeBack.Item2);
 
-            return new Tuple<List<int[]>, List<int[]>, bool>(tspSolution, tspSearching, false);
+            return new Tuple<List<int[]>, List<int[]>, List<int[]>>(tspSolution, tspSearching, visited);
         }
 
         public Tuple<List<int[]>, List<int[]>> getRouteBack(int[] current, List<int[]> visited)

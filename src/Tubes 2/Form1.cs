@@ -184,7 +184,7 @@ namespace WinFormsApp1
             {
                 // Initialize map
                 defaultMap = new Map(convertToStringArray(settings1.mapfFile));
-                Tuple<List<int[]>, List<int[]>, bool> result = null;
+                Tuple<List<int[]>, List<int[]>, List<int[]>> result = null;
                 
                 // Pencarian solusi sesuai dengan algoritma yang dipilih
                 if(settings1.algoChoice == 0 || settings1.algoChoice == 1 || settings1.algoChoice == 3 || settings1.algoChoice == 4)
@@ -269,7 +269,7 @@ namespace WinFormsApp1
         } 
 
         // Visualize rute
-        private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>,bool> result)
+        private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>, List<int[]>> result)
         {
             // Inisialisasi flag kunjungan
             bool repeatedNode;

@@ -10,7 +10,7 @@ namespace Tubes_2.algorithms
     {
         public Bfs(Map map) : base(map) { }
 
-        public Tuple<List<int[]>, List<int[]>, bool> bfsearch()
+        public Tuple<List<int[]>, List<int[]>, List<int[]>> bfsearch()
         {
             int[] startingPoint = this.map.getStartingPoint();
             Queue<Tuple<int[], List<int[]>>> nodeQueue = new Queue<Tuple<int[], List<int[]>>>();
@@ -82,7 +82,7 @@ namespace Tubes_2.algorithms
             {
                 solved = false;
             }
-            return new Tuple<List<int[]>, List<int[]>, bool>(path, searchRoute, solved);
+            return new Tuple<List<int[]>, List<int[]>, List<int[]>>(path, searchRoute, visited);
         }
     }
 }
