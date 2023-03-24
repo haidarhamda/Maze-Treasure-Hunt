@@ -38,6 +38,7 @@
             this.DelaySlider = new System.Windows.Forms.TrackBar();
             this.SliderTextBox = new System.Windows.Forms.TextBox();
             this.TSPButton = new System.Windows.Forms.RadioButton();
+            this.TSPCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DelaySlider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,20 +153,34 @@
             // 
             this.TSPButton.AutoSize = true;
             this.TSPButton.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.TSPButton.Location = new System.Drawing.Point(700, 64);
+            this.TSPButton.Location = new System.Drawing.Point(810, 126);
             this.TSPButton.Name = "TSPButton";
             this.TSPButton.Size = new System.Drawing.Size(62, 23);
             this.TSPButton.TabIndex = 9;
             this.TSPButton.TabStop = true;
             this.TSPButton.Text = "TSP";
             this.TSPButton.UseVisualStyleBackColor = true;
+            this.TSPButton.Visible = false;
             this.TSPButton.CheckedChanged += new System.EventHandler(this.TSPButton_CheckedChanged);
+            // 
+            // TSPCheckBox
+            // 
+            this.TSPCheckBox.AutoSize = true;
+            this.TSPCheckBox.Font = new System.Drawing.Font("Century Schoolbook", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.TSPCheckBox.Location = new System.Drawing.Point(700, 67);
+            this.TSPCheckBox.Name = "TSPCheckBox";
+            this.TSPCheckBox.Size = new System.Drawing.Size(63, 23);
+            this.TSPCheckBox.TabIndex = 10;
+            this.TSPCheckBox.Text = "TSP";
+            this.TSPCheckBox.UseVisualStyleBackColor = true;
+            this.TSPCheckBox.CheckedChanged += new System.EventHandler(this.TSPCheckBox_CheckedChanged);
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.TSPCheckBox);
             this.Controls.Add(this.TSPButton);
             this.Controls.Add(this.SliderTextBox);
             this.Controls.Add(this.DelaySlider);
@@ -197,5 +212,6 @@
         private TrackBar DelaySlider;
         private TextBox SliderTextBox;
         private RadioButton TSPButton;
+        private CheckBox TSPCheckBox;
     }
 }

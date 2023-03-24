@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -54,14 +54,14 @@
             this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.dataGridView1.Location = new System.Drawing.Point(9, 3);
             this.dataGridView1.Name = "dataGridView1";
@@ -97,7 +97,7 @@
             this.flowLayoutPanel1.Controls.Add(this.settings1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(27, 65);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(929, 681);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(929, 698);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // panel1
@@ -109,7 +109,7 @@
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 476);
+            this.panel1.Size = new System.Drawing.Size(901, 474);
             this.panel1.TabIndex = 9;
             // 
             // searchButton
@@ -130,12 +130,13 @@
             // output1
             // 
             this.output1.BackColor = System.Drawing.Color.Transparent;
+            this.output1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.output1.execTime = null;
-            this.output1.Location = new System.Drawing.Point(9, 482);
+            this.output1.Location = new System.Drawing.Point(4, 513);
             this.output1.Name = "output1";
             this.output1.nodes = null;
             this.output1.route = null;
-            this.output1.Size = new System.Drawing.Size(898, 182);
+            this.output1.Size = new System.Drawing.Size(894, 103);
             this.output1.steps = null;
             this.output1.TabIndex = 1;
             // 
@@ -145,7 +146,7 @@
             this.settings1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.settings1.BackColor = System.Drawing.Color.Transparent;
             this.settings1.delaySettings = 0.01D;
-            this.settings1.Location = new System.Drawing.Point(3, 485);
+            this.settings1.Location = new System.Drawing.Point(3, 483);
             this.settings1.mapfFile = null;
             this.settings1.Name = "settings1";
             this.settings1.safeSettings = false;
@@ -178,7 +179,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(968, 731);
+            this.ClientSize = new System.Drawing.Size(968, 748);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);

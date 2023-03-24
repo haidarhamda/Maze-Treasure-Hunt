@@ -165,7 +165,7 @@ namespace WinFormsApp1
                     }
                 }
             }
-
+            
 
             // Initialize map
             Map defaultMap = null;
@@ -173,7 +173,7 @@ namespace WinFormsApp1
             {
                 defaultMap = new Map(convertToStringArray(settings1.mapfFile));
                 Tuple<List<int[]>, List<int[]>, bool> result = null;
-
+                MessageBox.Show(settings1.algoChoice.ToString());
                 if (settings1.algoChoice == 0)
                 {
                     //MessageBox.Show(settings1.algoChoice.ToString());
@@ -234,7 +234,7 @@ namespace WinFormsApp1
                     output1.steps = (result.Item1.Count - 1).ToString();
                     watch.Reset();
                 }
-                else if (settings1.algoChoice == 2)
+                else if (settings1.algoChoice >= 3)
                 {
                     if (!resizeOnce2)
                     {

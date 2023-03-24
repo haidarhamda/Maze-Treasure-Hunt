@@ -68,7 +68,11 @@ namespace WinFormsApp1
         {
             if (BFSButton.Checked)
             {
-                algoChoice = 0;
+                algoChoice += 1;
+            }
+            else
+            {
+                algoChoice -= 1;
             }
         }
 
@@ -76,7 +80,11 @@ namespace WinFormsApp1
         {
             if (DFSButton.Checked)
             {
-                algoChoice = 1;
+                algoChoice += 2;
+            }
+            else
+            {
+                algoChoice -= 2;
             }
         }
 
@@ -92,6 +100,18 @@ namespace WinFormsApp1
             if(TSPButton.Checked)
             {
                 algoChoice = 2;
+            }
+        }
+
+        private void TSPCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TSPCheckBox.Checked)
+            {
+                algoChoice += 3;
+            }
+            else
+            {
+                algoChoice -= 3;
             }
         }
     }
