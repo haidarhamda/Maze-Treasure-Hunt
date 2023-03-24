@@ -162,7 +162,6 @@
             this.settings1.Size = new System.Drawing.Size(887, 171);
             this.settings1.TabIndex = 1;
             this.settings1.SettingsChanged += new System.EventHandler(this.start_map_visual);
-            this.settings1.Load += new System.EventHandler(this.settings1_Load);
             // 
             // pictureBox1
             // 

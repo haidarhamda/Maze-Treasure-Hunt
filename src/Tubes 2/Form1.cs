@@ -12,7 +12,6 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
-        private String mapFile;
         private bool resizeOnce = false;
         private bool resizeOnce2 = false;
         public Form1()
@@ -20,6 +19,7 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
+        // Menghitung node unik pada array
         private static int countUnique(List<int[]> nodes)
         {
             List<int[]> result = new List<int[]>();
@@ -33,10 +33,13 @@ namespace WinFormsApp1
             return result.Count;
         }
 
-
+        // Visualize map
         private void start_map_visual(object sender, EventArgs e)
         {
+            // Clear selection
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Transparent;
+
+            // Menampilkan map
             const Int32 BufferSize = 128;
             using (var fileStream = File.OpenRead(settings1.mapfFile))
             {
@@ -46,10 +49,9 @@ namespace WinFormsApp1
                     int row = 0;
                     int col = 0;
 
-                    // COunt rows and columns
+                    // Count rows and columns without whitespace
                     while ((line = streamReader.ReadLine()) != null)
                     {
-                        //MessageBox.Show(line);
                         col = 0;
                         for (int i = 0; i < line.Length; i++)
                         {
@@ -59,18 +61,16 @@ namespace WinFormsApp1
                             }
                         }
                         row++;
-
                     }
 
+                    // Menginisialisasi ukuran grid
                     dataGridView1.ColumnCount = col;
                     dataGridView1.RowCount = row;
-                    //MessageBox.Show(col.ToString() + row.ToString());
-
                 }
             }
 
 
-            // Input values
+            // Memasukkan detail map
             using (var fileStream = File.OpenRead(settings1.mapfFile))
             {
                 using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
@@ -115,12 +115,14 @@ namespace WinFormsApp1
                         col++;
 
                     }
+
+                    // Menghilangkan header grid
                     dataGridView1.ColumnHeadersVisible = false;
                     dataGridView1.RowHeadersVisible = false;
                 }
             }
 
-
+            // Mensetting dimensi grid
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             int colAuto = dataGridView1.Size.Width / dataGridView1.ColumnCount;
             int rowAuto = dataGridView1.Size.Height / dataGridView1.RowCount;
@@ -133,15 +135,23 @@ namespace WinFormsApp1
             {
                 dataGridView1.Rows[i].Height = rowAuto;
             }
+            
+            // Resize app
+            resize(ref resizeOnce, 30);
 
-            if (!resizeOnce)
-            {
-                panel1.Height += 30;
-                this.Height += 30;
-                resizeOnce = true;
-            }
-
+            // Clear selection
             dataGridView1.ClearSelection();
+        }
+
+        // Resize app
+        private void resize(ref bool flag, int delta)
+        {
+            if (!flag)
+            {
+                panel1.Height += delta;
+                this.Height += delta;
+                flag = true;
+            }
         }
 
         private async void searchButton_Click(object sender, EventArgs e)
@@ -152,9 +162,10 @@ namespace WinFormsApp1
             output1.steps = "None";
             output1.execTime = "None";
 
+            // Menampilkan maze
             start_map_visual(sender, EventArgs.Empty);
 
-            //Clear cell color
+            // Clear cell color
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 for(int j = 0; j < dataGridView1.Columns.Count; j++)
@@ -167,115 +178,72 @@ namespace WinFormsApp1
             }
             
 
-            // Initialize map
+            
             Map defaultMap = null;
             try
             {
+                // Initialize map
                 defaultMap = new Map(convertToStringArray(settings1.mapfFile));
                 Tuple<List<int[]>, List<int[]>, bool> result = null;
-                if (settings1.algoChoice == 0)
+                
+                // Pencarian solusi sesuai dengan algoritma yang dipilih
+                if(settings1.algoChoice == 0 || settings1.algoChoice == 1 || settings1.algoChoice >= 3)
                 {
-                    //MessageBox.Show(settings1.algoChoice.ToString());
-                    if (!resizeOnce2)
-                    {
-                        panel1.Height += 170;
-                        this.Height += 170;
-                        resizeOnce2 = true;
-                    }
-
+                    // Resize app
+                    resize(ref resizeOnce2, 170);
+                    
+                    // Start execution time counter
                     var watch = new System.Diagnostics.Stopwatch();
                     watch.Start();
-                    Bfs algo = new Bfs(defaultMap);
-                    result = algo.bfsearch();
 
+                    // Get solution
+                    if(settings1.algoChoice == 0)
+                    {
+                        Bfs algo = new Bfs(defaultMap);
+                        result = algo.bfsearch();
+                    }else if(settings1.algoChoice == 1)
+                    {
+                        Dfs algo = new Dfs(defaultMap);
+                        result = algo.dfsearch();
+                    }else if(settings1.algoChoice >= 3)
+                    {
+                        Tsp algo = new Tsp(defaultMap);
+                        result = algo.tsproblem();
+                    }
+
+                    // Stop counter
                     watch.Stop();
 
+                    // Visualisasi hasil
                     var task = startVisualizeAsync(result);
                     await task;
+
+                    // Menampilkan output
                     TimeSpan elapsed = watch.Elapsed;
                     output1.execTime = elapsed.TotalMilliseconds.ToString() + " ms";
-                    string test = "Nodes: ";
-                    //List<int[]> testing = result.Item2.Distinct().ToList();
-                    //for (int i = 0; i < result.Item2.Count; i++)
-                    //{
-                    //    test = test + "(" + testing[i][0].ToString() + ", " + testing[i][1].ToString() + ")";
-                    //}
-                    //MessageBox.Show(test);
                     output1.nodes = countUnique(result.Item2).ToString();
                     output1.steps = (result.Item1.Count - 1).ToString();
-                    watch.Reset();
-                }
-                else if (settings1.algoChoice == 1)
-                {
-                    if (!resizeOnce2)
-                    {
-                        panel1.Height += 170;
-                        this.Height += 170;
-                        resizeOnce2 = true;
-                    }
-                    var watch = new System.Diagnostics.Stopwatch();
-                    watch.Start();
-                    Dfs algo = new Dfs(defaultMap);
-                    result = algo.dfsearch();
-                    watch.Stop();
 
-                    var task = startVisualizeAsync(result);
-                    await task;
-                    TimeSpan elapsed = watch.Elapsed;
-                    output1.execTime = elapsed.TotalMilliseconds.ToString() + " ms";
-                    //string test = "";
-                    //for (int i = 0; i < result.Item2.Count; i++)
-                    //{
-                    //    test = test + "(" + result.Item2[i][0].ToString() + ", " + result.Item2[i][1].ToString() + ")";
-                    //}
-                    //MessageBox.Show(test);
-                    output1.nodes = countUnique(result.Item2).ToString();
-                    output1.steps = (result.Item1.Count - 1).ToString();
-                    watch.Reset();
-                }
-                else if (settings1.algoChoice >= 3)
-                {
-                    if (!resizeOnce2)
-                    {
-                        panel1.Height += 220;
-                        this.Height += 220;
-                        resizeOnce2 = true;
-                    }
-                    var watch = new System.Diagnostics.Stopwatch();
-                    watch.Start();
-
-                    Tsp algo = new Tsp(defaultMap);
-                    Tuple<List<int[]>, List<int[]>, bool> resultTSP = algo.tsproblem();
-
-
-                    //MessageBox.Show("test");
-                    watch.Stop();
-
-                    var task = startVisualizeAsync(resultTSP);
-                    await task;
-                    TimeSpan elapsed = watch.Elapsed;
-                    output1.execTime = elapsed.TotalMilliseconds.ToString() + " ms";
-                    string test = "Nodes: ";
-
-                    output1.nodes = countUnique(resultTSP.Item2).ToString();
-                    output1.steps = (resultTSP.Item1.Count - 1).ToString();
+                    // Reset counter
                     watch.Reset();
 
-                }
-                else
+                }else
                 {
+                    // Pilihan algoritma tidak valid
                     MessageBox.Show("Pilih algoritma pencarian yang ingin digunakan terlebih dahulu!");
                 }
 
             }
             catch(Exception err)
             {
+                // Format map tidak valid
                 MessageBox.Show(err.Message);
             }
 
             
         }
 
+        // Menentukan apakah sebuah point berada disampingnya atau tidak
         private bool isBeside(int[] current, int[] next)
         {
             if (current[0] == next[0])
@@ -295,46 +263,30 @@ namespace WinFormsApp1
             return false;
         } 
 
+        // Visualize rute
         private async Task startVisualizeAsync(Tuple<List<int[]>, List<int[]>,bool> result)
         {
-
-            // Show search route
+            // Inisialisasi flag kunjungan
             bool repeatedNode;
 
+            // Show search route
             for (int i = 0; i < result.Item2.Count; i++)
             {
                 repeatedNode = false;
 
+                // Flag jika node sudah pernah dikunjungi
                 if (dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Yellow || dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor == Color.Orange)
                 {
                     repeatedNode = true;
                 }
 
+                // Menunjukkan current node
                 dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Blue;
 
-                //// check left
-                //if ((result.Item2[i][1] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor != Color.Green)
-                //{
-                //    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 2].Style.BackColor = Color.Yellow;
-                //}
-                //// check right
-                //if ((result.Item2[i][1]) < dataGridView1.ColumnCount && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor != Color.Green)
-                //{
-                //    dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1]].Style.BackColor = Color.Yellow;
-                //}
-                //// check up
-                //if ((result.Item2[i][0] - 2) >= 0 && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
-                //{
-                //    dataGridView1.Rows[result.Item2[i][0] - 2].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
-                //}
-                //// check down
-                //if ((result.Item2[i][0]) < dataGridView1.RowCount && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.DarkGreen && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Black && dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor != Color.Green)
-                //{
-                //    dataGridView1.Rows[result.Item2[i][0]].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Yellow;
-                //}
-
+                // Delay untuk animasi
                 await Task.Delay((int)(settings1.delaySettings * 1000));
 
+                // Jika node sudah pernah dikunjungi ubah menjadi warna Orange, jika tidak ubah menjadi Yellow
                 if (repeatedNode)
                 {
                     dataGridView1.Rows[result.Item2[i][0] - 1].Cells[result.Item2[i][1] - 1].Style.BackColor = Color.Orange;
@@ -346,24 +298,14 @@ namespace WinFormsApp1
 
             }
 
-
-            ////Clear yellow
-            //for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            //{
-            //    for (int j = 0; j < dataGridView1.Columns.Count; j++)
-            //    {
-            //        if (dataGridView1.Rows[i].Cells[j].Style.BackColor == Color.Yellow)
-            //        {
-            //            dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
-            //        }
-            //    }
-            //}
-
-            // Show solution
+            // Show solution route
             string routeDir = "";
             for (int i = 0; i < result.Item1.Count; i++)
             {
+                // Ubah warna cell
                 dataGridView1.Rows[result.Item1[i][0] - 1].Cells[result.Item1[i][1] - 1].Style.BackColor = Color.IndianRed;
+                
+                // Menentukan arah gerak solusi
                 if(i != (result.Item1.Count - 1))
                 {
                     if (isBeside(result.Item1[i + 1], result.Item1[i]))
@@ -393,13 +335,16 @@ namespace WinFormsApp1
                     
 
                 }
+
+                // Delay untuk animasi
                 await Task.Delay((int)(settings1.delaySettings * 1000));
             }
 
+            //Menampilkan output arah rute solusi
             output1.route = routeDir;
-
         }
 
+        // Ubah isi text file menjadi array string 2 dimensi
         private string[,] convertToStringArray(string filename)
         {
             string[] lines = File.ReadAllLines(settings1.mapfFile);
@@ -413,11 +358,6 @@ namespace WinFormsApp1
                 }
             }
             return _map;
-        }
-
-        private void settings1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
