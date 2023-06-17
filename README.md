@@ -1,36 +1,36 @@
-# Tubes2_DuelisSejati
-> Misal terdapat sebuah labirin dengan sebuah atau beberapa treasure, dan labirin tersebut ingin ditelusuri. Diperlukan sebuah program dengan GUI sederhana yang dapat mengimplementiasikan BFS dan DFS untuk mendapatkan rute memperoleh seluruh treasure yang ada. Program dapat menerima input file txt dan memvisualisasikan bentuk labirin serta rute solusinya.
+# Maze Treasure Hunt Using DFS and BFS Approach
+> Suppose there is a maze with one or several treasures, and the maze needs to be explored. A program with a simple GUI is required to implement BFS and DFS algorithms to find the routes to collect all the treasures. The program should be able to accept input from a txt file and visualize the maze's structure along with the solution routes.
 
-## Struktur Folder
-- `src` berisi sourcecode program
-- `test` berisi input file txt untuk testing
-- `bin` berisi executable code
-- `doc` berisi laporan dalam format pdf
+## Folder Structure
+- `src` contains the source code of the program.
+- `test` contains input txt files for testing purposes.
+- `bin` contains the executable code.
+- `doc` contains the report in PDF format.
 
 ## Program Requirement
 - .NET 6.0 (latest release/stable version)
 - Visual Studio 2022 (optional to compile program)
 
-## Cara Menjalankan Program
-1. Buka folder `bin`
-2. Jalankan file `Tubes 2.exe`
+## How to Run the Program
+1. Open the `bin` folder.
+2. Run the `Tubes 2.exe` file.
 
-## Cara Mengcompile program
-1. Buka visual studio
-2. Pilih `Open a project or solution`
-3. Pilih `Tubes2_DuelisSejati` > `src` > `Tubes 2.sln`
-4. Tekan `Ctrl + B` atau tanda panah hijau di window atas
-5. Program akan dibuild dan akan langsung berjalan
-6. Hasil program dapat dilihat juga di dalam folder bin (cari sampai ketemu .exe)
+## How to Compile the Program
+1. Open Visual Studio.
+2. Select "Open a project or solution".
+3. Navigate to `src` > `Tubes 2.sln`.
+4. Press `Ctrl + B` or click on the green arrow in the top window.
+5. The program will be built and run automatically.
+6. The output of the program can also be found in the bin folder (search for the .exe file).
 
-## Cara Menggunakan
-1. Click `Add File` dan pilih file txt yang ingin dimasukan ke program
-2. Click `Visualize` untuk memviusalisasikan labirin pada file txt
-3. Pilih metode pencarian `BFS` atau `DFS`, selain itu `TSP` juga dapat dicheck untuk melakukan pencarian solusi hingga kembali ke titik start
-4. Bila input file benar, maka pencarian akan mulai divisualisasikan
-5. Untuk mempercepat atau memperlambat pencarian, slider di bawah dapat di geser
-6. Setelah solusi ditampilkan, maka pencarian telah selesai
-7. Pencarian dengan file lain dapat dilakukan dengan mengikuti langkah yang sama dari awal
+## How to Use
+1. Click on `Add File` and select the txt file you want to input into the program.
+2. Click on `Visualize` to visualize the maze from the txt file.
+3. Select the search method, either `BFS` or `DFS`. Additionally, you can check `TSP` to perform the search for a solution that returns to the starting point.
+4. If the input file is correct, the search process will be visualized.
+5. To speed up or slow down the search, adjust the slider below.
+6. Once the solution is displayed, the search is complete.
+7. You can perform searches with other files by following the same steps from the beginning.
 
 ## Author
 | Name         | NIM            | Github |
